@@ -1,4 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 /**
  * CodeIgniter
  *
@@ -118,13 +119,15 @@ if ( ! function_exists('_list'))
 		if (is_array($attributes))
 		{
 			$atts = '';
+			
 			foreach ($attributes as $key => $val)
 			{
 				$atts .= ' ' . $key . '="' . $val . '"';
 			}
+			
 			$attributes = $atts;
 		}
-		elseif (is_string($attributes) AND strlen($attributes) > 0)
+		elseif (is_string($attributes) && strlen($attributes) > 0)
 		{
 			$attributes = ' '. $attributes;
 		}
@@ -134,8 +137,8 @@ if ( ! function_exists('_list'))
 
 		// Cycle through the list elements.  If an array is
 		// encountered we will recursively call _list()
-
 		static $_last_list_item = '';
+		
 		foreach ($list as $key => $val)
 		{
 			$_last_list_item = $key;
@@ -215,7 +218,7 @@ if ( ! function_exists('img'))
 		foreach ($src as $k=>$v)
 		{
 
-			if ($k == 'src' AND strpos($v, '://') === FALSE)
+			if ($k == 'src' && strpos($v, '://') === FALSE)
 			{
 				$CI =& get_instance();
 
@@ -263,7 +266,8 @@ if ( ! function_exists('doctype'))
 
 		if ( ! is_array($_doctypes))
 		{
-			if (defined('ENVIRONMENT') AND is_file(APPPATH.'config/'.ENVIRONMENT.'/doctypes.php'))
+			if (defined('ENVIRONMENT') && 
+				is_file(APPPATH.'config/'.ENVIRONMENT.'/doctypes.php'))
 			{
 				include(APPPATH.'config/'.ENVIRONMENT.'/doctypes.php');
 			}
@@ -282,10 +286,8 @@ if ( ! function_exists('doctype'))
 		{
 			return $_doctypes[$type];
 		}
-		else
-		{
-			return FALSE;
-		}
+
+		return FALSE;
 	}
 }
 
@@ -307,7 +309,8 @@ if ( ! function_exists('doctype'))
  */
 if ( ! function_exists('link_tag'))
 {
-	function link_tag($href = '', $rel = 'stylesheet', $type = 'text/css', $title = '', $media = '', $index_page = FALSE)
+	function link_tag($href = '', $rel = 'stylesheet', $type = 'text/css', 
+					  $title = '', $media = '', $index_page = FALSE)
 	{
 		$CI =& get_instance();
 
@@ -317,7 +320,7 @@ if ( ! function_exists('link_tag'))
 		{
 			foreach ($href as $k=>$v)
 			{
-				if ($k == 'href' AND strpos($v, '://') === FALSE)
+				if ($k == 'href' && strpos($v, '://') === FALSE)
 				{
 					if ($index_page === TRUE)
 					{
@@ -366,7 +369,6 @@ if ( ! function_exists('link_tag'))
 			$link .= '/>';
 		}
 
-
 		return $link;
 	}
 }
@@ -388,7 +390,14 @@ if ( ! function_exists('meta'))
 		// or a multidimensional one, we need to do a little prepping.
 		if ( ! is_array($name))
 		{
-			$name = array(array('name' => $name, 'content' => $content, 'type' => $type, 'newline' => $newline));
+			$name = array(
+				array(
+					'name' 		=> $name, 
+					'content'	=> $content, 
+					'type' 		=> $type, 
+					'newline' 	=> $newline
+				)
+			);
 		}
 		else
 		{
@@ -402,10 +411,10 @@ if ( ! function_exists('meta'))
 		$str = '';
 		foreach ($name as $meta)
 		{
-			$type		= ( ! isset($meta['type']) OR $meta['type'] == 'name') ? 'name' : 'http-equiv';
-			$name		= ( ! isset($meta['name']))		? ''	: $meta['name'];
-			$content	= ( ! isset($meta['content']))	? ''	: $meta['content'];
-			$newline	= ( ! isset($meta['newline']))	? "\n"	: $meta['newline'];
+			$type = ( ! isset($meta['type']) OR $meta['type'] == 'name') ? 'name' : 'http-equiv';
+			$name = ( ! isset($meta['name'])) ? '' : $meta['name'];
+			$content = ( ! isset($meta['content']))	? '' : $meta['content'];
+			$newline = ( ! isset($meta['newline']))	? "\n" : $meta['newline'];
 
 			$str .= '<meta '.$type.'="'.$name.'" content="'.$content.'" />'.$newline;
 		}
@@ -431,6 +440,7 @@ if ( ! function_exists('nbs'))
 	}
 }
 
+// ------------------------------------------------------------------------
 
 /* End of file html_helper.php */
 /* Location: ./system/helpers/html_helper.php */

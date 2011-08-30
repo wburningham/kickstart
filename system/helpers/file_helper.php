@@ -1,4 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 /**
  * CodeIgniter
  *
@@ -168,12 +169,14 @@ if ( ! function_exists('delete_files'))
  * @access	public
  * @param	string	path to source
  * @param	bool	whether to include the path as part of the filename
- * @param	bool	internal variable to determine recursion status - do not use in calls
+ * @param	bool	internal variable to determine recursion status
+ * 						- do not use in calls
  * @return	array
  */
 if ( ! function_exists('get_filenames'))
 {
-	function get_filenames($source_dir, $include_path = FALSE, $_recursion = FALSE)
+	function get_filenames($source_dir, $include_path = FALSE,
+						   $_recursion = FALSE)
 	{
 		static $_filedata = array();
 
@@ -199,14 +202,12 @@ if ( ! function_exists('get_filenames'))
 			}
 			return $_filedata;
 		}
-		else
-		{
-			return FALSE;
-		}
+
+		return FALSE;
 	}
 }
 
-// --------------------------------------------------------------------
+// ------------------------------------------------------------------------
 
 /**
  * Get Directory File Information
@@ -219,12 +220,14 @@ if ( ! function_exists('get_filenames'))
  * @access	public
  * @param	string	path to source
  * @param	bool	Look only at the top level directory specified?
- * @param	bool	internal variable to determine recursion status - do not use in calls
+ * @param	bool	internal variable to determine recursion status
+ * 						- do not use in calls
  * @return	array
  */
 if ( ! function_exists('get_dir_file_info'))
 {
-	function get_dir_file_info($source_dir, $top_level_only = TRUE, $_recursion = FALSE)
+	function get_dir_file_info($source_dir, $top_level_only = TRUE,
+							   $_recursion = FALSE)
 	{
 		static $_filedata = array();
 		$relative_path = $source_dir;
@@ -254,28 +257,28 @@ if ( ! function_exists('get_dir_file_info'))
 
 			return $_filedata;
 		}
-		else
-		{
-			return FALSE;
-		}
+
+		return FALSE;
 	}
 }
 
-// --------------------------------------------------------------------
+// ------------------------------------------------------------------------
 
 /**
-* Get File Info
-*
-* Given a file and path, returns the name, path, size, date modified
-* Second parameter allows you to explicitly declare what information you want returned
-* Options are: name, server_path, size, date, readable, writable, executable, fileperms
-* Returns FALSE if the file cannot be found.
-*
-* @access	public
-* @param	string	path to file
-* @param	mixed	array or comma separated string of information returned
-* @return	array
-*/
+ * Get File Info
+ *
+ * Given a file and path, returns the name, path, size, date modified
+ * Second parameter allows you to explicitly declare what information
+ * you want returned
+ * Options are: name, server_path, size, date, readable, writable, executable,
+ * fileperms
+ * Returns FALSE if the file cannot be found.
+ *
+ * @access	public
+ * @param	string	path to file
+ * @param	mixed	array or comma separated string of information returned
+ * @return	array
+ */
 if ( ! function_exists('get_file_info'))
 {
 	function get_file_info($file, $returned_values = array('name', 'server_path', 'size', 'date'))
@@ -311,7 +314,8 @@ if ( ! function_exists('get_file_info'))
 					$fileinfo['readable'] = is_readable($file);
 					break;
 				case 'writable':
-					// There are known problems using is_weritable on IIS.  It may not be reliable - consider fileperms()
+					// There are known problems using is_weritable on IIS.
+					// It may not be reliable - consider fileperms()
 					$fileinfo['writable'] = is_writable($file);
 					break;
 				case 'executable':
@@ -327,7 +331,7 @@ if ( ! function_exists('get_file_info'))
 	}
 }
 
-// --------------------------------------------------------------------
+// ------------------------------------------------------------------------
 
 /**
  * Get Mime by Extension
@@ -335,8 +339,9 @@ if ( ! function_exists('get_file_info'))
  * Translates a file extension into a mime type based on config/mimes.php.
  * Returns FALSE if it can't determine the type, or open the mime config file
  *
- * Note: this is NOT an accurate way of determining file mime types, and is here strictly as a convenience
- * It should NOT be trusted, and should certainly NOT be used for security
+ * Note: this is NOT an accurate way of determining file mime types,
+ * 		and is here strictly as a convenience.
+ * 		It should NOT be trusted, and should certainly NOT be used for security
  *
  * @access	public
  * @param	string	path to file
@@ -352,7 +357,8 @@ if ( ! function_exists('get_mime_by_extension'))
 
 		if ( ! is_array($mimes))
 		{
-			if (defined('ENVIRONMENT') AND is_file(APPPATH.'config/'.ENVIRONMENT.'/mimes.php'))
+			if (defined('ENVIRONMENT') &&
+				is_file(APPPATH.'config/'.ENVIRONMENT.'/mimes.php'))
 			{
 				include(APPPATH.'config/'.ENVIRONMENT.'/mimes.php');
 			}
@@ -374,19 +380,15 @@ if ( ! function_exists('get_mime_by_extension'))
 				// Multiple mime types, just give the first one
 				return current($mimes[$extension]);
 			}
-			else
-			{
-				return $mimes[$extension];
-			}
+
+			return $mimes[$extension];
 		}
-		else
-		{
-			return FALSE;
-		}
+
+		return FALSE;
 	}
 }
 
-// --------------------------------------------------------------------
+// ------------------------------------------------------------------------
 
 /**
  * Symbolic Permissions
@@ -454,7 +456,7 @@ if ( ! function_exists('symbolic_permissions'))
 	}
 }
 
-// --------------------------------------------------------------------
+// ------------------------------------------------------------------------
 
 /**
  * Octal Permissions
@@ -474,6 +476,7 @@ if ( ! function_exists('octal_permissions'))
 	}
 }
 
+// ------------------------------------------------------------------------
 
 /* End of file file_helper.php */
 /* Location: ./system/helpers/file_helper.php */

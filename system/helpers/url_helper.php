@@ -1,4 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 /**
  * CodeIgniter
  *
@@ -203,8 +204,18 @@ if ( ! function_exists('anchor_popup'))
 		{
 			$attributes = array();
 		}
+		
+		$deft_attrs = array(
+			'width' 		=> '800', 
+			'height' 		=> '600', 
+			'scrollbars' 	=> 'yes', 
+			'status' 		=> 'yes', 
+			'resizable' 	=> 'yes', 
+			'screenx' 		=> '0', 
+			'screeny' 		=> '0'
+		);
 
-		foreach (array('width' => '800', 'height' => '600', 'scrollbars' => 'yes', 'status' => 'yes', 'resizable' => 'yes', 'screenx' => '0', 'screeny' => '0', ) as $key => $val)
+		foreach ($deft_attrs as $key => $val)
 		{
 			$atts[$key] = ( ! isset($attributes[$key])) ? $val : $attributes[$key];
 			unset($attributes[$key]);
@@ -235,7 +246,7 @@ if ( ! function_exists('mailto'))
 	function mailto($email, $title = '', $attributes = '')
 	{
 		$title = (string) $title;
-
+		
 		if ($title == "")
 		{
 			$title = $email;
@@ -394,15 +405,17 @@ if ( ! function_exists('auto_link'))
 						$matches['6'][$i] = substr($matches['6'][$i], 0, -1);
 					}
 
-					$str = str_replace($matches['0'][$i],
-										$matches['1'][$i].'<a href="http'.
-										$matches['4'][$i].'://'.
-										$matches['5'][$i].
-										$matches['6'][$i].'"'.$pop.'>http'.
-										$matches['4'][$i].'://'.
-										$matches['5'][$i].
-										$matches['6'][$i].'</a>'.
-										$period, $str);
+					$str = str_replace(
+						$matches['0'][$i],
+						$matches['1'][$i].'<a href="http'.
+						$matches['4'][$i].'://'.
+						$matches['5'][$i].
+						$matches['6'][$i].'"'.$pop.'>http'.
+						$matches['4'][$i].'://'.
+						$matches['5'][$i].
+						$matches['6'][$i].'</a>'.
+						$period, $str
+					);
 				}
 			}
 		}
@@ -532,7 +545,8 @@ if ( ! function_exists('url_title'))
  */
 if ( ! function_exists('redirect'))
 {
-	function redirect($uri = '', $method = 'location', $http_response_code = 302)
+	function redirect($uri = '', $method = 'location', 
+					  $http_response_code = 302)
 	{
 		if ( ! preg_match('#^https?://#i', $uri))
 		{
@@ -593,6 +607,7 @@ if ( ! function_exists('_parse_attributes'))
 	}
 }
 
+// ------------------------------------------------------------------------
 
 /* End of file url_helper.php */
 /* Location: ./system/helpers/url_helper.php */

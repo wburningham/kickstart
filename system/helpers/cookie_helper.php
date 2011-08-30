@@ -1,4 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 /**
  * CodeIgniter
  *
@@ -44,7 +45,8 @@
  */
 if ( ! function_exists('set_cookie'))
 {
-	function set_cookie($name = '', $value = '', $expire = '', $domain = '', $path = '/', $prefix = '', $secure = FALSE)
+	function set_cookie($name = '', $value = '', $expire = '', $domain = '',
+						$path = '/', $prefix = '', $secure = FALSE)
 	{
 		// Set the config file options
 		$CI =& get_instance();
@@ -52,7 +54,7 @@ if ( ! function_exists('set_cookie'))
 	}
 }
 
-// --------------------------------------------------------------------
+// ------------------------------------------------------------------------
 
 /**
  * Fetch an item from the COOKIE array
@@ -79,7 +81,7 @@ if ( ! function_exists('get_cookie'))
 	}
 }
 
-// --------------------------------------------------------------------
+// ------------------------------------------------------------------------
 
 /**
  * Delete a COOKIE
@@ -98,6 +100,7 @@ if ( ! function_exists('delete_cookie'))
 	}
 }
 
+// ------------------------------------------------------------------------
 
 /* End of file cookie_helper.php */
 /* Location: ./system/helpers/cookie_helper.php */

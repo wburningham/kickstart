@@ -1,4 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 /**
  * CodeIgniter
  *
@@ -62,7 +63,7 @@ if ( ! function_exists('sanitize_filename'))
 	}
 }
 
-// --------------------------------------------------------------------
+// ------------------------------------------------------------------------
 
 /**
  * Hash encode a string
@@ -75,14 +76,7 @@ if ( ! function_exists('do_hash'))
 {
 	function do_hash($str, $type = 'sha1')
 	{
-		if ($type == 'sha1')
-		{
-			return sha1($str);
-		}
-		else
-		{
-			return md5($str);
-		}
+		return ($type == 'sha1') ? sha1($str) : md5($str);
 	}
 }
 
@@ -123,6 +117,7 @@ if ( ! function_exists('encode_php_tags'))
 	}
 }
 
+// ------------------------------------------------------------------------
 
 /* End of file security_helper.php */
 /* Location: ./system/helpers/security_helper.php */

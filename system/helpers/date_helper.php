@@ -1,4 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 /**
  * CodeIgniter
  *
@@ -84,14 +85,14 @@ if ( ! function_exists('mdate'))
 	{
 		if ($datestr == '')
 		{
-			return '';			
+			return '';
 		}
 
 		$time = ($time == '') ? now() : $time;
 
 		$datestr = str_replace(
-			'%\\', 
-			'', 
+			'%\\',
+			'',
 			preg_replace("/([a-z]+?){1}/i", "\\\\\\1", $datestr)
 		);
 
@@ -116,16 +117,16 @@ if ( ! function_exists('standard_date'))
 	function standard_date($fmt = 'DATE_RFC822', $time = '')
 	{
 		$formats = array(
-						'DATE_ATOM'		=>	'%Y-%m-%dT%H:%i:%s%Q',
-						'DATE_COOKIE'	=>	'%l, %d-%M-%y %H:%i:%s UTC',
-						'DATE_ISO8601'	=>	'%Y-%m-%dT%H:%i:%s%Q',
-						'DATE_RFC822'	=>	'%D, %d %M %y %H:%i:%s %O',
-						'DATE_RFC850'	=>	'%l, %d-%M-%y %H:%m:%i UTC',
-						'DATE_RFC1036'	=>	'%D, %d %M %y %H:%i:%s %O',
-						'DATE_RFC1123'	=>	'%D, %d %M %Y %H:%i:%s %O',
-						'DATE_RSS'		=>	'%D, %d %M %Y %H:%i:%s %O',
-						'DATE_W3C'		=>	'%Y-%m-%dT%H:%i:%s%Q'
-						);
+			'DATE_ATOM'		=>	'%Y-%m-%dT%H:%i:%s%Q',
+			'DATE_COOKIE'	=>	'%l, %d-%M-%y %H:%i:%s UTC',
+			'DATE_ISO8601'	=>	'%Y-%m-%dT%H:%i:%s%Q',
+			'DATE_RFC822'	=>	'%D, %d %M %y %H:%i:%s %O',
+			'DATE_RFC850'	=>	'%l, %d-%M-%y %H:%m:%i UTC',
+			'DATE_RFC1036'	=>	'%D, %d %M %y %H:%i:%s %O',
+			'DATE_RFC1123'	=>	'%D, %d %M %Y %H:%i:%s %O',
+			'DATE_RSS'		=>	'%D, %d %M %Y %H:%i:%s %O',
+			'DATE_W3C'		=>	'%Y-%m-%dT%H:%i:%s%Q'
+		);
 
 		if ( ! isset($formats[$fmt]))
 		{
@@ -303,13 +304,13 @@ if ( ! function_exists('local_to_gmt'))
 		{
 			$time = time();
 		}
-		
+
 		return mktime(
-			gmdate("H", $time), 
-			gmdate("i", $time), 
-			gmdate("s", $time), 
-			gmdate("m", $time), 
-			gmdate("d", $time), 
+			gmdate("H", $time),
+			gmdate("i", $time),
+			gmdate("s", $time),
+			gmdate("m", $time),
+			gmdate("d", $time),
 			gmdate("Y", $time)
 		);
 	}
@@ -402,14 +403,8 @@ if ( ! function_exists('unix_to_human'))
 	{
 		$r  = date('Y', $time).'-'.date('m', $time).'-'.date('d', $time).' ';
 
-		if ($fmt == 'us')
-		{
-			$r .= date('h', $time).':'.date('i', $time);
-		}
-		else
-		{
-			$r .= date('H', $time).':'.date('i', $time);
-		}
+		$localize = ($fmt == 'us') ? 'h' : 'H';
+		$r .= date($localize, $time).':'.date('i', $time);
 
 		if ($seconds)
 		{
@@ -482,17 +477,17 @@ if ( ! function_exists('human_to_unix'))
 
 			if (substr($ampm, 0, 1) == 'p' AND $hour < 12)
 			{
-				$hour = $hour + 12;				
+				$hour = $hour + 12;
 			}
 
 			if (substr($ampm, 0, 1) == 'a' AND $hour == 12)
 			{
 				$hour =  '00';
 			}
-			
+
 			if (strlen($hour) == 1)
 			{
-				$hour = '0'.$hour;				
+				$hour = '0'.$hour;
 			}
 		}
 
@@ -505,7 +500,7 @@ if ( ! function_exists('human_to_unix'))
 /**
  * Turns many "reasonably-date-like" strings into something
  * that is actually useful. This only works for dates after unix epoch.
- * 
+ *
  * @access  public
  * @param   string  The terribly formatted date-like string
  * @param   string  Date format to return (same as php date function)
@@ -513,7 +508,7 @@ if ( ! function_exists('human_to_unix'))
  */
 if ( ! function_exists('nice_date'))
 {
-	function nice_date($bad_date = '', $format = FALSE) 
+	function nice_date($bad_date = '', $format = FALSE)
 	{
 		if (empty($bad_date))
 		{
@@ -521,47 +516,47 @@ if ( ! function_exists('nice_date'))
 		}
 
 		// Date like: YYYYMM
-		if (preg_match('/^\d{6}$/', $bad_date)) 
+		if (preg_match('/^\d{6}$/', $bad_date))
 		{
-			if (in_array(substr($bad_date, 0, 2),array('19', '20'))) 
+			if (in_array(substr($bad_date, 0, 2),array('19', '20')))
 			{
 				$year  = substr($bad_date, 0, 4);
 				$month = substr($bad_date, 4, 2);
-			} 
-			else 
+			}
+			else
 			{
 				$month  = substr($bad_date, 0, 2);
 				$year   = substr($bad_date, 2, 4);
 			}
-			
+
 			return date($format, strtotime($year . '-' . $month . '-01'));
 		}
-		
+
 		// Date Like: YYYYMMDD
-		if (preg_match('/^\d{8}$/',$bad_date)) 
+		if (preg_match('/^\d{8}$/',$bad_date))
 		{
 			$month = substr($bad_date, 0, 2);
 			$day   = substr($bad_date, 2, 2);
 			$year  = substr($bad_date, 4, 4);
-			
+
 			return date($format, strtotime($month . '/01/' . $year));
 		}
-		
+
 		// Date Like: MM-DD-YYYY __or__ M-D-YYYY (or anything in between)
 		if (preg_match('/^\d{1,2}-\d{1,2}-\d{4}$/',$bad_date))
-		{ 
+		{
 			list($m, $d, $y) = explode('-', $bad_date);
 			return date($format, strtotime("{$y}-{$m}-{$d}"));
 		}
-		
+
 		// Any other kind of string, when converted into UNIX time,
 		// produces "0 seconds after epoc..." is probably bad...
 		// return "Invalid Date".
 		if (date('U', strtotime($bad_date)) == '0')
-		{ 
+		{
 			return "Invalid Date";
 		}
-		
+
 		// It's probably a valid-ish date format already
 		return date($format, strtotime($bad_date));
 	}
@@ -676,9 +671,9 @@ if ( ! function_exists('timezones'))
 		{
 			return $zones;
 		}
-		
+
 		$tz = ($tz == 'GMT') ? 'UTC' : $tz;
-		
+
 		return ( ! isset($zones[$tz])) ? 0 : $zones[$tz];
 	}
 }

@@ -1,4 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 /**
  * CodeIgniter
  *
@@ -93,22 +94,15 @@ if ( ! function_exists('elements'))
 	function elements($items, $array, $default = FALSE)
 	{
 		$return = array();
-		
+
 		if ( ! is_array($items))
 		{
 			$items = array($items);
 		}
-		
+
 		foreach ($items as $item)
 		{
-			if (isset($array[$item]))
-			{
-				$return[$item] = $array[$item];
-			}
-			else
-			{
-				$return[$item] = $default;
-			}
+			$return[$item] = (isset($array[$item])) ? $array[$item] : $default;
 		}
 
 		return $return;

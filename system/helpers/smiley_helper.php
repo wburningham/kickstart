@@ -1,4 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 /**
  * CodeIgniter
  *
@@ -53,48 +54,48 @@ if ( ! function_exists('smiley_js'))
 
 		if ($do_setup === TRUE)
 		{
-				$do_setup = FALSE;
+			$do_setup = FALSE;
 
-				$m = array();
+			$m = array();
 
-				if (is_array($alias))
+			if (is_array($alias))
+			{
+				foreach ($alias as $name => $id)
 				{
-					foreach ($alias as $name => $id)
-					{
-						$m[] = '"'.$name.'" : "'.$id.'"';
-					}
+					$m[] = '"'.$name.'" : "'.$id.'"';
+				}
+			}
+
+			$m = '{'.implode(',', $m).'}';
+
+			$r .= <<<EOF
+			var smiley_map = {$m};
+
+			function insert_smiley(smiley, field_id) {
+				var el = document.getElementById(field_id), newStart;
+
+				if ( ! el && smiley_map[field_id]) {
+					el = document.getElementById(smiley_map[field_id]);
+
+					if ( ! el)
+						return false;
 				}
 
-				$m = '{'.implode(',', $m).'}';
+				el.focus();
+				smiley = " " + smiley;
 
-				$r .= <<<EOF
-				var smiley_map = {$m};
+				if ('selectionStart' in el) {
+					newStart = el.selectionStart + smiley.length;
 
-				function insert_smiley(smiley, field_id) {
-					var el = document.getElementById(field_id), newStart;
-
-					if ( ! el && smiley_map[field_id]) {
-						el = document.getElementById(smiley_map[field_id]);
-
-						if ( ! el)
-							return false;
-					}
-
-					el.focus();
-					smiley = " " + smiley;
-
-					if ('selectionStart' in el) {
-						newStart = el.selectionStart + smiley.length;
-
-						el.value = el.value.substr(0, el.selectionStart) +
-										smiley +
-										el.value.substr(el.selectionEnd, el.value.length);
-						el.setSelectionRange(newStart, newStart);
-					}
-					else if (document.selection) {
-						document.selection.createRange().text = smiley;
-					}
+					el.value = el.value.substr(0, el.selectionStart) +
+									smiley +
+									el.value.substr(el.selectionEnd, el.value.length);
+					el.setSelectionRange(newStart, newStart);
 				}
+				else if (document.selection) {
+					document.selection.createRange().text = smiley;
+				}
+			}
 EOF;
 		}
 		else
@@ -112,10 +113,8 @@ EOF;
 		{
 			return '<script type="text/javascript" charset="utf-8">/*<![CDATA[ */'.$r.'// ]]></script>';
 		}
-		else
-		{
-			return $r;
-		}
+
+		return $r;
 	}
 }
 
@@ -157,7 +156,8 @@ if ( ! function_exists('get_clickable_smileys'))
 		foreach ($smileys as $key => $val)
 		{
 			// Keep duplicates from being used, which can happen if the
-			// mapping array contains multiple identical replacements.  For example:
+			// mapping array contains multiple identical replacements.  
+			// For example:
 			// :-) and :) might be replaced with the same image so both smileys
 			// will be in the array.
 			if (isset($used[$smileys[$key][0]]))
@@ -229,7 +229,8 @@ if ( ! function_exists('_get_smiley_array'))
 {
 	function _get_smiley_array()
 	{
-		if (defined('ENVIRONMENT') AND file_exists(APPPATH.'config/'.ENVIRONMENT.'/smileys.php'))
+		if (defined('ENVIRONMENT') &&
+			file_exists(APPPATH.'config/'.ENVIRONMENT.'/smileys.php'))
 		{
 		    include(APPPATH.'config/'.ENVIRONMENT.'/smileys.php');
 		}
@@ -276,6 +277,7 @@ EOF;
 	}
 }
 
+// ------------------------------------------------------------------------
 
 /* End of file smiley_helper.php */
 /* Location: ./system/helpers/smiley_helper.php */

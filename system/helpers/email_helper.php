@@ -1,4 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 /**
  * CodeIgniter
  *
@@ -57,6 +58,7 @@ if ( ! function_exists('send_email'))
 	}
 }
 
+// ------------------------------------------------------------------------
 
 /* End of file email_helper.php */
 /* Location: ./system/helpers/email_helper.php */

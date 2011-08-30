@@ -1,4 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 /**
  * CodeIgniter
  *
@@ -36,7 +37,8 @@
  *
  * @access	public
  * @param	string	path to source
- * @param	int		depth of directories to traverse (0 = fully recursive, 1 = current dir, etc)
+ * @param	int		depth of directories to traverse 
+ * 						(0 = fully recursive, 1 = current dir, etc)
  * @return	array
  */
 if ( ! function_exists('directory_map'))
@@ -52,12 +54,14 @@ if ( ! function_exists('directory_map'))
 			while (FALSE !== ($file = readdir($fp)))
 			{
 				// Remove '.', '..', and hidden files [optional]
-				if ( ! trim($file, '.') OR ($hidden == FALSE && $file[0] == '.'))
+				if ( ! trim($file, '.') OR
+					($hidden == FALSE && $file[0] == '.'))
 				{
 					continue;
 				}
 
-				if (($directory_depth < 1 OR $new_depth > 0) && @is_dir($source_dir.$file))
+				if (($directory_depth < 1 OR $new_depth > 0) &&
+					@is_dir($source_dir.$file))
 				{
 					$filedata[$file] = directory_map($source_dir.$file.DIRECTORY_SEPARATOR, $new_depth, $hidden);
 				}
@@ -75,6 +79,7 @@ if ( ! function_exists('directory_map'))
 	}
 }
 
+// ------------------------------------------------------------------------
 
 /* End of file directory_helper.php */
 /* Location: ./system/helpers/directory_helper.php */

@@ -1,4 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 /**
  * CodeIgniter
  *
@@ -128,9 +129,11 @@ if ( ! function_exists('ascii_to_entities'))
 			if ($ordinal < 128)
 			{
 				/*
-					If the $temp array has a value but we have moved on, then it seems only
-					fair that we output that entity and restart $temp before continuing. -Paul
+					If the $temp array has a value but we have moved on, 
+					then it seems only fair that we output that entity and 
+					restart $temp before continuing.
 				*/
+
 				if (count($temp) == 1)
 				{
 					$out  .= '&#'.array_shift($temp).';';
@@ -210,9 +213,11 @@ if ( ! function_exists('entities_to_ascii'))
 
 		if ($all)
 		{
-			$str = str_replace(array("&amp;", "&lt;", "&gt;", "&quot;", "&apos;", "&#45;"),
-								array("&","<",">","\"", "'", "-"),
-								$str);
+			$str = str_replace(
+				array("&amp;", "&lt;", "&gt;", "&quot;", "&apos;", "&#45;"),
+				array("&","<",">","\"", "'", "-"),
+				$str
+			);
 		}
 
 		return $str;
@@ -286,11 +291,17 @@ if ( ! function_exists('highlight_code'))
 		// brackets so we need them to start raw
 		$str = str_replace(array('&lt;', '&gt;'), array('<', '>'), $str);
 
-		// Replace any existing PHP tags to temporary markers so they don't accidentally
-		// break the string out of PHP, and thus, thwart the highlighting.
+		// Replace any existing PHP tags to temporary markers so they 
+		// don't accidentally break the string out of PHP, and thus, 
+		// thwart the highlighting.
 
-		$str = str_replace(array('<?', '?>', '<%', '%>', '\\', '</script>'),
-							array('phptagopen', 'phptagclose', 'asptagopen', 'asptagclose', 'backslashtmp', 'scriptclose'), $str);
+		$str = str_replace(
+			array('<?', '?>', '<%', '%>', '\\', '</script>'),
+			array(
+				'phptagopen', 'phptagclose', 'asptagopen', 
+				'asptagclose', 'backslashtmp', 'scriptclose'), 
+			$str
+		);
 
 		// The highlight_string function requires that the text be surrounded
 		// by PHP tags, which we will remove later
@@ -337,7 +348,8 @@ if ( ! function_exists('highlight_code'))
  */
 if ( ! function_exists('highlight_phrase'))
 {
-	function highlight_phrase($str, $phrase, $tag_open = '<strong>', $tag_close = '</strong>')
+	function highlight_phrase($str, $phrase, $tag_open = '<strong>', 
+							  $tag_close = '</strong>')
 	{
 		if ($str == '')
 		{
@@ -366,7 +378,8 @@ if ( ! function_exists('convert_accented_characters'))
 {
 	function convert_accented_characters($str)
 	{
-		if (defined('ENVIRONMENT') AND is_file(APPPATH.'config/'.ENVIRONMENT.'/foreign_chars.php'))
+		if (defined('ENVIRONMENT') && 
+			is_file(APPPATH.'config/'.ENVIRONMENT.'/foreign_chars.php'))
 		{
 			include(APPPATH.'config/'.ENVIRONMENT.'/foreign_chars.php');
 		}
@@ -380,7 +393,11 @@ if ( ! function_exists('convert_accented_characters'))
 			return $str;
 		}
 
-		return preg_replace(array_keys($foreign_characters), array_values($foreign_characters), $str);
+		return preg_replace(
+			array_keys($foreign_characters), 
+			array_values($foreign_characters),
+			$str
+		);
 	}
 }
 
@@ -460,14 +477,7 @@ if ( ! function_exists('word_wrap'))
 
 			// If $temp contains data it means we had to split up an over-length
 			// word into smaller chunks so we'll add it back to our current line
-			if ($temp != '')
-			{
-				$output .= $temp."\n".$line;
-			}
-			else
-			{
-				$output .= $line;
-			}
+			$output .= ($temp != '') ? $temp."\n".$line : $line;
 
 			$output .= "\n";
 		}
@@ -493,7 +503,8 @@ if ( ! function_exists('word_wrap'))
 /**
  * Ellipsize String
  *
- * This function will strip tags from a string, split it at its max_length and ellipsize
+ * This function will strip tags from a string, split it at its max_length 
+ * and ellipsize
  *
  * @param	string		string to ellipsize
  * @param	integer		max length of string
@@ -530,6 +541,8 @@ if ( ! function_exists('ellipsize'))
 		return $beg.$ellipsis.$end;
 	}
 }
+
+// ------------------------------------------------------------------------
 
 /* End of file text_helper.php */
 /* Location: ./system/helpers/text_helper.php */

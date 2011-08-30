@@ -1,4 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 /**
  * CodeIgniter
  *
@@ -54,5 +55,6 @@ if ( ! function_exists('lang'))
 }
 
 // ------------------------------------------------------------------------
+
 /* End of file language_helper.php */
 /* Location: ./system/helpers/language_helper.php */
