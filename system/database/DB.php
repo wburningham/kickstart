@@ -1,4 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 /**
  * CodeIgniter
  *
@@ -73,12 +74,12 @@ function &DB($params = '', $active_record_override = NULL)
 		}
 
 		$params = array(
-							'dbdriver'	=> $dns['scheme'],
-							'hostname'	=> (isset($dns['host'])) ? rawurldecode($dns['host']) : '',
-							'username'	=> (isset($dns['user'])) ? rawurldecode($dns['user']) : '',
-							'password'	=> (isset($dns['pass'])) ? rawurldecode($dns['pass']) : '',
-							'database'	=> (isset($dns['path'])) ? rawurldecode(substr($dns['path'], 1)) : ''
-						);
+			'dbdriver'	=> $dns['scheme'],
+			'hostname'	=> (isset($dns['host'])) ? rawurldecode($dns['host']) : '',
+			'username'	=> (isset($dns['user'])) ? rawurldecode($dns['user']) : '',
+			'password'	=> (isset($dns['pass'])) ? rawurldecode($dns['pass']) : '',
+			'database'	=> (isset($dns['path'])) ? rawurldecode(substr($dns['path'], 1)) : ''
+		);
 
 		// were additional config items set?
 		if (isset($dns['query']))
@@ -155,8 +156,6 @@ function &DB($params = '', $active_record_override = NULL)
 
 	return $DB;
 }
-
-
 
 /* End of file DB.php */
 /* Location: ./system/database/DB.php */

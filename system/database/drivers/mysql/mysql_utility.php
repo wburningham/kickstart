@@ -1,4 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 /**
  * CodeIgniter
  *
@@ -22,15 +23,15 @@
  * @author		ExpressionEngine Dev Team
  * @link		http://codeigniter.com/user_guide/database/
  */
+
 class CI_DB_mysql_utility extends CI_DB_utility {
 
 	/**
 	 * List databases
 	 *
-	 * @access	private
 	 * @return	bool
 	 */
-	function _list_databases()
+	public function _list_databases()
 	{
 		return "SHOW DATABASES";
 	}
@@ -42,11 +43,10 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 	 *
 	 * Generates a platform-specific query so that a table can be optimized
 	 *
-	 * @access	private
 	 * @param	string	the table name
 	 * @return	object
 	 */
-	function _optimize_table($table)
+	public function _optimize_table($table)
 	{
 		return "OPTIMIZE TABLE ".$this->db->_escape_identifiers($table);
 	}
@@ -58,11 +58,10 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 	 *
 	 * Generates a platform-specific query so that a table can be repaired
 	 *
-	 * @access	private
 	 * @param	string	the table name
 	 * @return	object
 	 */
-	function _repair_table($table)
+	public function _repair_table($table)
 	{
 		return "REPAIR TABLE ".$this->db->_escape_identifiers($table);
 	}
@@ -71,11 +70,10 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 	/**
 	 * MySQL Export
 	 *
-	 * @access	private
 	 * @param	array	Preferences
 	 * @return	mixed
 	 */
-	function _backup($params = array())
+	public function _backup($params = array())
 	{
 		if (count($params) == 0)
 		{
