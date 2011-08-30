@@ -1,4 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 /**
  * CodeIgniter
  *
@@ -111,6 +112,8 @@ class CI_Benchmark {
 	}
 
 }
+
+	// --------------------------------------------------------------------
 
 // END CI_Benchmark class
 

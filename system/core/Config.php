@@ -1,4 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 /**
  * CodeIgniter
  *
@@ -28,35 +29,24 @@
  */
 class CI_Config {
 
-	/**
-	 * List of all loaded config values
-	 *
-	 * @var array
-	 */
-	var $config = array();
-	/**
-	 * List of all loaded config files
-	 *
-	 * @var array
-	 */
-	var $is_loaded = array();
-	/**
-	 * List of paths to search when trying to load a config file
-	 *
-	 * @var array
-	 */
+	var $config = array(); // List of all loaded config values
+	var $is_loaded = array();  // List of all loaded config files
+	
+	// List of paths to search when trying to load a config file
 	var $_config_paths = array(APPPATH);
 
 	/**
 	 * Constructor
 	 *
-	 * Sets the $config data from the primary config.php file as a class variable
+	 * Sets the $config data from the primary config.php file 
+	 * as a class variable
 	 *
 	 * @access   public
 	 * @param   string	the config file name
-	 * @param   boolean  if configuration values should be loaded into their own section
-	 * @param   boolean  true if errors should just return false, false if an error message should be displayed
-	 * @return  boolean  if the file was successfully loaded or not
+	 * @param   boolean  if configuration values should be loaded 
+	 * 					 into their own section
+	 * @param   boolean  true if errors should just return false, 
+	 * 					 false if an error message should be displayed
 	 */
 	function __construct()
 	{
@@ -89,8 +79,10 @@ class CI_Config {
 	 *
 	 * @access	public
 	 * @param	string	the config file name
-	 * @param   boolean  if configuration values should be loaded into their own section
-	 * @param   boolean  true if errors should just return false, false if an error message should be displayed
+	 * @param   boolean  if configuration values should be loaded into 
+	 * 					 their own section
+	 * @param   boolean  true if errors should just return false, false if 
+	 * 					 an error message should be displayed
 	 * @return	boolean	if the file was loaded correctly
 	 */
 	function load($file = '', $use_sections = FALSE, $fail_gracefully = FALSE)
@@ -199,12 +191,8 @@ class CI_Config {
 		}
 		else
 		{
-			if ( ! isset($this->config[$index]))
-			{
-				return FALSE;
-			}
-
-			if ( ! isset($this->config[$index][$item]))
+			if ( ! isset($this->config[$index]) OR
+				 ! isset($this->config[$index][$item]))
 			{
 				return FALSE;
 			}
@@ -231,6 +219,7 @@ class CI_Config {
 		{
 			return FALSE;
 		}
+		
 		if( trim($this->config[$item]) == '')
 		{
 			return '';
@@ -267,7 +256,7 @@ class CI_Config {
 		}
 	}
 
-	// -------------------------------------------------------------
+	// --------------------------------------------------------------------
 
 	/**
 	 * Base URL
@@ -282,7 +271,7 @@ class CI_Config {
 		return $this->slash_item('base_url').ltrim($this->_uri_string($uri),'/');
 	}
 
-	// -------------------------------------------------------------
+	// --------------------------------------------------------------------
 
 	/**
 	 * Build URI string for use in Config::site_url() and Config::base_url()
@@ -371,6 +360,8 @@ class CI_Config {
 			}
 		}
 	}
+
+	// --------------------------------------------------------------------
 }
 
 // END CI_Config class

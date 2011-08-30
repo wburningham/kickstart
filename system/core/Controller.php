@@ -1,4 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 /**
  * CodeIgniter
  *
@@ -52,11 +53,20 @@ class CI_Controller {
 		
 		log_message('debug', "Controller Class Initialized");
 	}
+	
+	// --------------------------------------------------------------------
 
+	/**
+	 * &get_instance()
+	 *
+	 * Returns the singleton object
+	 */
 	public static function &get_instance()
 	{
 		return self::$instance;
 	}
+
+	// --------------------------------------------------------------------
 }
 // END Controller class
 

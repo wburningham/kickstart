@@ -27,32 +27,10 @@
  * @link		http://codeigniter.com/user_guide/
  */
 
-/**
- * CodeIgniter Version
- *
- * @var string
- *
- */
-	/**
-	 * CodeIgniter Version
-	 *
-	 * @var string
-	 *
-	 */
+ 	// CodeIgniter Version
 	define('CI_VERSION', '2.1.0-dev');
 
-/**
- * CodeIgniter Branch (Core = TRUE, Reactor = FALSE)
- *
- * @var boolean
- *
- */
-	/**
-	 * CodeIgniter Branch (Core = TRUE, Reactor = FALSE)
-	 *
-	 * @var string
-	 *
-	 */
+	// CodeIgniter Branch (Core = TRUE, Reactor = FALSE)
 	define('CI_CORE', FALSE);
 
 /*
@@ -67,7 +45,8 @@
  *  Load the framework constants
  * ------------------------------------------------------
  */
-	if (defined('ENVIRONMENT') AND file_exists(APPPATH.'config/'.ENVIRONMENT.'/constants.php'))
+	if (defined('ENVIRONMENT') && 
+		file_exists(APPPATH.'config/'.ENVIRONMENT.'/constants.php'))
 	{
 		require(APPPATH.'config/'.ENVIRONMENT.'/constants.php');
 	}
@@ -104,7 +83,8 @@
  * Note: Since the config file data is cached it doesn't
  * hurt to load it here.
  */
-	if (isset($assign_to_config['subclass_prefix']) AND $assign_to_config['subclass_prefix'] != '')
+	if (isset($assign_to_config['subclass_prefix']) && 
+		$assign_to_config['subclass_prefix'] != '')
 	{
 		get_config(array('subclass_prefix' => $assign_to_config['subclass_prefix']));
 	}
@@ -114,7 +94,7 @@
  *  Set a liberal script execution time limit
  * ------------------------------------------------------
  */
-	if (function_exists("set_time_limit") == TRUE AND @ini_get("safe_mode") == 0)
+	if (function_exists("set_time_limit") == TRUE && @ini_get("safe_mode") == 0)
 	{
 		@set_time_limit(300);
 	}
@@ -182,12 +162,12 @@
  * ------------------------------------------------------
  */
 	$RTR =& load_class('Router', 'core');
-	$RTR->_set_routing();
+	$RTR->set_routing();
 
 	// Set any routing overrides that may exist in the main index file
 	if (isset($routing))
 	{
-		$RTR->_set_overrides($routing);
+		$RTR->set_overrides($routing);
 	}
 
 /*

@@ -1,4 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 /**
  * CodeIgniter
  *
@@ -93,7 +94,8 @@ if ( ! function_exists('is_really_writable'))
 			@unlink($file);
 			return TRUE;
 		}
-		elseif ( ! is_file($file) OR ($fp = @fopen($file, FOPEN_WRITE_CREATE)) === FALSE)
+		elseif ( ! is_file($file) OR 
+				($fp = @fopen($file, FOPEN_WRITE_CREATE)) === FALSE)
 		{
 			return FALSE;
 		}
@@ -221,9 +223,11 @@ if ( ! function_exists('get_config'))
 		{
 			return $_config[0];
 		}
+		
+		$file_path = APPPATH.'config/'.ENVIRONMENT.'/config.php';
 
 		// Is the config file in the environment folder?
-		if ( ! defined('ENVIRONMENT') OR ! file_exists($file_path = APPPATH.'config/'.ENVIRONMENT.'/config.php'))
+		if ( ! defined('ENVIRONMENT') OR ! file_exists($file_path))
 		{
 			$file_path = APPPATH.'config/config.php';
 		}
@@ -280,6 +284,7 @@ if ( ! function_exists('config_item'))
 			{
 				return FALSE;
 			}
+			
 			$_config_item[$item] = $config[$item];
 		}
 
@@ -303,7 +308,8 @@ if ( ! function_exists('config_item'))
 */
 if ( ! function_exists('show_error'))
 {
-	function show_error($message, $status_code = 500, $heading = 'An Error Was Encountered')
+	function show_error($message, $status_code = 500, 
+						$heading = 'An Error Was Encountered')
 	{
 		$_error =& load_class('Exceptions', 'core');
 		echo $_error->show_error($heading, $message, 'error_general', $status_code);
@@ -448,7 +454,7 @@ if ( ! function_exists('set_status_header'))
 	}
 }
 
-// --------------------------------------------------------------------
+// ------------------------------------------------------------------------
 
 /**
 * Exception Handler
@@ -497,7 +503,7 @@ if ( ! function_exists('_exception_handler'))
 	}
 }
 
-// --------------------------------------------------------------------
+// ------------------------------------------------------------------------
 
 /**
  * Remove Invisible Characters
@@ -553,12 +559,12 @@ if ( ! function_exists('html_escape'))
 		{
 			return array_map('html_escape', $var);
 		}
-		else
-		{
-			return htmlspecialchars($var, ENT_QUOTES, config_item('charset'));
-		}
+
+		return htmlspecialchars($var, ENT_QUOTES, config_item('charset'));
 	}
 }
+
+// ------------------------------------------------------------------------
 
 /* End of file Common.php */
 /* Location: ./system/core/Common.php */

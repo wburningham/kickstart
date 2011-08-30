@@ -1,4 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 /**
  * CodeIgniter
  *
@@ -25,40 +26,29 @@
  * @link		http://codeigniter.com/user_guide/libraries/exceptions.html
  */
 class CI_Exceptions {
+	
 	var $action;
 	var $severity;
 	var $message;
 	var $filename;
 	var $line;
+	var $ob_level;  // Nesting level of the output buffering mechanism
 
-	/**
-	 * Nesting level of the output buffering mechanism
-	 *
-	 * @var int
-	 * @access public
-	 */
-	var $ob_level;
-
-	/**
-	 * List if available error levels
-	 *
-	 * @var array
-	 * @access public
-	 */
+	// List if available error levels
 	var $levels = array(
-						E_ERROR				=>	'Error',
-						E_WARNING			=>	'Warning',
-						E_PARSE				=>	'Parsing Error',
-						E_NOTICE			=>	'Notice',
-						E_CORE_ERROR		=>	'Core Error',
-						E_CORE_WARNING		=>	'Core Warning',
-						E_COMPILE_ERROR		=>	'Compile Error',
-						E_COMPILE_WARNING	=>	'Compile Warning',
-						E_USER_ERROR		=>	'User Error',
-						E_USER_WARNING		=>	'User Warning',
-						E_USER_NOTICE		=>	'User Notice',
-						E_STRICT			=>	'Runtime Notice'
-					);
+		E_ERROR				=>	'Error',
+		E_WARNING			=>	'Warning',
+		E_PARSE				=>	'Parsing Error',
+		E_NOTICE			=>	'Notice',
+		E_CORE_ERROR		=>	'Core Error',
+		E_CORE_WARNING		=>	'Core Warning',
+		E_COMPILE_ERROR		=>	'Compile Error',
+		E_COMPILE_WARNING	=>	'Compile Warning',
+		E_USER_ERROR		=>	'User Error',
+		E_USER_WARNING		=>	'User Warning',
+		E_USER_NOTICE		=>	'User Notice',
+		E_STRICT			=>	'Runtime Notice'
+	);
 
 
 	/**
@@ -88,7 +78,11 @@ class CI_Exceptions {
 	{
 		$severity = ( ! isset($this->levels[$severity])) ? $severity : $this->levels[$severity];
 
-		log_message('error', 'Severity: '.$severity.'  --> '.$message. ' '.$filepath.' '.$line, TRUE);
+		log_message(
+			'error', 
+			'Severity: '.$severity.'  --> '.$message. ' '.$filepath.' '.$line, 
+			TRUE
+		);
 	}
 
 	// --------------------------------------------------------------------
@@ -132,7 +126,8 @@ class CI_Exceptions {
 	 * @param 	int		the status code
 	 * @return	string
 	 */
-	function show_error($heading, $message, $template = 'error_general', $status_code = 500)
+	function show_error($heading, $message, $template = 'error_general', 
+						$status_code = 500)
 	{
 		set_status_header($status_code);
 
@@ -142,6 +137,7 @@ class CI_Exceptions {
 		{
 			ob_end_flush();
 		}
+		
 		ob_start();
 		include(APPPATH.'errors/'.$template.'.php');
 		$buffer = ob_get_contents();
@@ -178,6 +174,7 @@ class CI_Exceptions {
 		{
 			ob_end_flush();
 		}
+		
 		ob_start();
 		include(APPPATH.'errors/error_php.php');
 		$buffer = ob_get_contents();
@@ -185,7 +182,7 @@ class CI_Exceptions {
 		echo $buffer;
 	}
 
-
+	// --------------------------------------------------------------------
 }
 // END Exceptions Class
 

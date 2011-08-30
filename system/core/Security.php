@@ -1,4 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 /**
  * CodeIgniter
  *
@@ -26,77 +27,40 @@
  */
 class CI_Security {
 
-	/**
-	 * Random Hash for protecting URLs
-	 *
-	 * @var string
-	 * @access protected
-	 */
-	protected $_xss_hash			= '';
+	protected $_xss_hash = ''; // Random Hash for protecting URLs
 	
-	/**
-	 * Random Hash for Cross Site Request Forgery Protection Cookie
-	 *
-	 * @var string
-	 * @access protected
-	 */
+	// Random Hash for Cross Site Request Forgery Protection Cookie
 	protected $_csrf_hash			= '';
 	
-	/**
-	 * Expiration time for Cross Site Request Forgery Protection Cookie
-	 * Defaults to two hours (in seconds)
-	 *
-	 * @var int
-	 * @access protected
-	 */
+	// Expiration time for Cross Site Request Forgery Protection Cookie
+	// Defaults to two hours (in seconds)
 	protected $_csrf_expire			= 7200;
 	
-	/**
-	 * Token name for Cross Site Request Forgery Protection Cookie
-	 *
-	 * @var string
-	 * @access protected
-	 */
+	// Token name for Cross Site Request Forgery Protection Cookie
 	protected $_csrf_token_name		= 'ci_csrf_token';
 	
-	/**
-	 * Cookie name for Cross Site Request Forgery Protection Cookie
-	 *
-	 * @var string
-	 * @access protected
-	 */
+	// Cookie name for Cross Site Request Forgery Protection Cookie
 	protected $_csrf_cookie_name	= 'ci_csrf_token';
 	
-	/**
-	 * List of never allowed strings
-	 *
-	 * @var array
-	 * @access protected
-	 */
-	
+	// List of never allowed strings
 	protected $_never_allowed_str = array(
-					'document.cookie'	=> '[removed]',
-					'document.write'	=> '[removed]',
-					'.parentNode'		=> '[removed]',
-					'.innerHTML'		=> '[removed]',
-					'window.location'	=> '[removed]',
-					'-moz-binding'		=> '[removed]',
-					'<!--'				=> '&lt;!--',
-					'-->'				=> '--&gt;',
-					'<![CDATA['			=> '&lt;![CDATA['
+		'document.cookie'	=> '[removed]',
+		'document.write'	=> '[removed]',
+		'.parentNode'		=> '[removed]',
+		'.innerHTML'		=> '[removed]',
+		'window.location'	=> '[removed]',
+		'-moz-binding'		=> '[removed]',
+		'<!--'				=> '&lt;!--',
+		'-->'				=> '--&gt;',
+		'<![CDATA['			=> '&lt;![CDATA['
 	);
 
-	/**
-	 * List of never allowed regex replacement
-	 *
-	 * @var array
-	 * @access protected
-	 */
+	// List of never allowed regex replacement
 	protected $_never_allowed_regex = array(
-					"javascript\s*:"			=> '[removed]',
-					"expression\s*(\(|&\#40;)"	=> '[removed]', // CSS and IE
-					"vbscript\s*:"				=> '[removed]', // IE, surprise!
-					"Redirect\s+302"			=> '[removed]'
+		"javascript\s*:"			=> '[removed]',
+		"expression\s*(\(|&\#40;)"	=> '[removed]', // CSS and IE
+		"vbscript\s*:"				=> '[removed]', // IE, surprise!
+		"Redirect\s+302"			=> '[removed]'
 	);
 
 	/**
@@ -199,7 +163,14 @@ class CI_Security {
 			}
 		}
 
-		setcookie($this->_csrf_cookie_name, $this->_csrf_hash, $expire, config_item('cookie_path'), config_item('cookie_domain'), $secure_cookie);
+		setcookie(
+			$this->_csrf_cookie_name, 
+			$this->_csrf_hash, 
+			$expire, 
+			config_item('cookie_path'), 
+			config_item('cookie_domain'), 
+			$secure_cookie
+		);
 
 		log_message('debug', "CRSF cookie Set");
 
@@ -276,10 +247,7 @@ class CI_Security {
 	 */
 	public function xss_clean($str, $is_image = FALSE)
 	{
-		/*
-		 * Is the string an array?
-		 *
-		 */
+		// Is the string an array?
 		if (is_array($str))
 		{
 			while (list($key) = each($str))
@@ -290,9 +258,7 @@ class CI_Security {
 			return $str;
 		}
 
-		/*
-		 * Remove Invisible Characters
-		 */
+		// Remove Invisible Characters
 		$str = remove_invisible_characters($str);
 
 		// Validate Entities in URLs
@@ -316,16 +282,12 @@ class CI_Security {
 		 * This permits our tests below to work reliably.
 		 * We only convert entities that are within tags since
 		 * these are the ones that will pose security problems.
-		 *
 		 */
-
 		$str = preg_replace_callback("/[a-z]+=([\'\"]).*?\\1/si", array($this, '_convert_attribute'), $str);
 
 		$str = preg_replace_callback("/<\w+.*?(?=>|<|$)/si", array($this, '_decode_entity'), $str);
 
-		/*
-		 * Remove Invisible Characters Again!
-		 */
+		// Remove Invisible Characters Again!
 		$str = remove_invisible_characters($str);
 
 		/*
@@ -336,15 +298,12 @@ class CI_Security {
 		 * NOTE: preg_replace was found to be amazingly slow here on
 		 * large blocks of data, so we use str_replace.
 		 */
-
 		if (strpos($str, "\t") !== FALSE)
 		{
 			$str = str_replace("\t", ' ', $str);
 		}
 
-		/*
-		 * Capture converted string for later comparison
-		 */
+		// Capture converted string for later comparison
 		$converted_string = $str;
 
 		// Remove Strings that are never allowed
@@ -368,7 +327,11 @@ class CI_Security {
 		}
 		else
 		{
-			$str = str_replace(array('<?', '?'.'>'),  array('&lt;?', '?&gt;'), $str);
+			$str = str_replace(
+				array('<?', '?'.'>'),  
+				array('&lt;?', '?&gt;'), 
+				$str
+			);
 		}
 
 		/*
@@ -378,9 +341,9 @@ class CI_Security {
 		 * These words are compacted back to their correct state.
 		 */
 		$words = array(
-				'javascript', 'expression', 'vbscript', 'script',
-				'applet', 'alert', 'document', 'write', 'cookie', 'window'
-			);
+			'javascript', 'expression', 'vbscript', 'script',
+			'applet', 'alert', 'document', 'write', 'cookie', 'window'
+		);
 
 		foreach ($words as $word)
 		{
@@ -469,7 +432,6 @@ class CI_Security {
 		 * string post-removal of XSS, then it fails, as there was unwanted XSS
 		 * code found and removed/changed during processing.
 		 */
-
 		if ($is_image === TRUE)
 		{
 			return ($str == $converted_string) ? TRUE: FALSE;
@@ -542,7 +504,6 @@ class CI_Security {
 		// at the end of an entity most browsers will still interpret the entity
 		// correctly.  html_entity_decode() does not convert entities without
 		// semicolons, so we are left with our own little solution here. Bummer.
-
 		if (function_exists('html_entity_decode') &&
 			(strtolower($charset) != 'utf-8'))
 		{
@@ -891,6 +852,7 @@ class CI_Security {
 		return $this->_csrf_hash;
 	}
 
+	// --------------------------------------------------------------------
 }
 
 /* End of file Security.php */
