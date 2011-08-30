@@ -28,15 +28,15 @@
  */
 class CI_Calendar {
 
-	var $CI;
-	var $lang;
-	var $local_time;
-	var $template		= '';
-	var $start_day		= 'sunday';
-	var $month_type		= 'long';
-	var $day_type		= 'abr';
-	var $show_next_prev	= FALSE;
-	var $next_prev_url	= '';
+	public $lang;
+	public $local_time;
+	public $template		= '';
+	public $start_day		= 'sunday';
+	public $month_type		= 'long';
+	public $day_type		= 'abr';
+	public $show_next_prev	= FALSE;
+	public $next_prev_url	= '';
+	protected $CI;
 
 	/**
 	 * Constructor
@@ -69,11 +69,10 @@ class CI_Calendar {
 	 *
 	 * Accepts an associative array as input, containing display preferences
 	 *
-	 * @access	public
 	 * @param	array	config preferences
 	 * @return	void
 	 */
-	function initialize($config = array())
+	public function initialize($config = array())
 	{
 		foreach ($config as $key => $val)
 		{
@@ -89,29 +88,38 @@ class CI_Calendar {
 	/**
 	 * Generate the calendar
 	 *
-	 * @access	public
 	 * @param	integer	the year
 	 * @param	integer	the month
 	 * @param	array	the data to be shown in the calendar cells
 	 * @return	string
 	 */
-	function generate($year = '', $month = '', $data = array())
+	public function generate($year = '', $month = '', $data = array())
 	{
 		// Set and validate the supplied month/year
 		if ($year == '')
-			$year  = date("Y", $this->local_time);
+		{
+			$year  = date("Y", $this->local_time);			
+		}
 
 		if ($month == '')
-			$month = date("m", $this->local_time);
+		{
+			$month = date("m", $this->local_time);			
+		}
 
 		if (strlen($year) == 1)
-			$year = '200'.$year;
+		{
+			$year = '200'.$year;			
+		}
 
 		if (strlen($year) == 2)
-			$year = '20'.$year;
+		{
+			$year = '20'.$year;			
+		}
 
 		if (strlen($month) == 1)
-			$month = '0'.$month;
+		{
+			$month = '0'.$month;			
+		}
 
 		$adjusted_date = $this->adjust_date($month, $year);
 
@@ -256,11 +264,10 @@ class CI_Calendar {
 	 * Generates a textual month name based on the numeric
 	 * month provided.
 	 *
-	 * @access	public
 	 * @param	integer	the month
 	 * @return	string
 	 */
-	function get_month_name($month)
+	public function get_month_name($month)
 	{
 		if ($this->month_type == 'short')
 		{
@@ -289,11 +296,10 @@ class CI_Calendar {
 	 * Returns an array of day names (Sunday, Monday, etc.) based
 	 * on the type.  Options: long, short, abrev
 	 *
-	 * @access	public
 	 * @param	string
 	 * @return	array
 	 */
-	function get_day_names($day_type = '')
+	public function get_day_names($day_type = '')
 	{
 		if ($day_type != '')
 			$this->day_type = $day_type;
@@ -329,12 +335,11 @@ class CI_Calendar {
 	 * For example, if you submit 13 as the month, the year will
 	 * increment and the month will become January.
 	 *
-	 * @access	public
 	 * @param	integer	the month
 	 * @param	integer	the year
 	 * @return	array
 	 */
-	function adjust_date($month, $year)
+	public function adjust_date($month, $year)
 	{
 		$date = array();
 
@@ -366,12 +371,11 @@ class CI_Calendar {
 	/**
 	 * Total days in a given month
 	 *
-	 * @access	public
 	 * @param	integer	the month
 	 * @param	integer	the year
 	 * @return	integer
 	 */
-	function get_total_days($month, $year)
+	public function get_total_days($month, $year)
 	{
 		$days_in_month	= array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
 
@@ -399,34 +403,33 @@ class CI_Calendar {
 	 *
 	 * This is used in the event that the user has not created their own template
 	 *
-	 * @access	public
 	 * @return array
 	 */
-	function default_template()
+	public function default_template()
 	{
 		return  array (
-						'table_open'				=> '<table border="0" cellpadding="4" cellspacing="0">',
-						'heading_row_start'			=> '<tr>',
-						'heading_previous_cell'		=> '<th><a href="{previous_url}">&lt;&lt;</a></th>',
-						'heading_title_cell'		=> '<th colspan="{colspan}">{heading}</th>',
-						'heading_next_cell'			=> '<th><a href="{next_url}">&gt;&gt;</a></th>',
-						'heading_row_end'			=> '</tr>',
-						'week_row_start'			=> '<tr>',
-						'week_day_cell'				=> '<td>{week_day}</td>',
-						'week_row_end'				=> '</tr>',
-						'cal_row_start'				=> '<tr>',
-						'cal_cell_start'			=> '<td>',
-						'cal_cell_start_today'		=> '<td>',
-						'cal_cell_content'			=> '<a href="{content}">{day}</a>',
-						'cal_cell_content_today'	=> '<a href="{content}"><strong>{day}</strong></a>',
-						'cal_cell_no_content'		=> '{day}',
-						'cal_cell_no_content_today'	=> '<strong>{day}</strong>',
-						'cal_cell_blank'			=> '&nbsp;',
-						'cal_cell_end'				=> '</td>',
-						'cal_cell_end_today'		=> '</td>',
-						'cal_row_end'				=> '</tr>',
-						'table_close'				=> '</table>'
-					);
+			'table_open'				=> '<table border="0" cellpadding="4" cellspacing="0">',
+			'heading_row_start'			=> '<tr>',
+			'heading_previous_cell'		=> '<th><a href="{previous_url}">&lt;&lt;</a></th>',
+			'heading_title_cell'		=> '<th colspan="{colspan}">{heading}</th>',
+			'heading_next_cell'			=> '<th><a href="{next_url}">&gt;&gt;</a></th>',
+			'heading_row_end'			=> '</tr>',
+			'week_row_start'			=> '<tr>',
+			'week_day_cell'				=> '<td>{week_day}</td>',
+			'week_row_end'				=> '</tr>',
+			'cal_row_start'				=> '<tr>',
+			'cal_cell_start'			=> '<td>',
+			'cal_cell_start_today'		=> '<td>',
+			'cal_cell_content'			=> '<a href="{content}">{day}</a>',
+			'cal_cell_content_today'	=> '<a href="{content}"><strong>{day}</strong></a>',
+			'cal_cell_no_content'		=> '{day}',
+			'cal_cell_no_content_today'	=> '<strong>{day}</strong>',
+			'cal_cell_blank'			=> '&nbsp;',
+			'cal_cell_end'				=> '</td>',
+			'cal_cell_end_today'		=> '</td>',
+			'cal_row_end'				=> '</tr>',
+			'table_close'				=> '</table>'
+		);
 	}
 
 	// --------------------------------------------------------------------
@@ -437,10 +440,9 @@ class CI_Calendar {
 	 * Harvests the data within the template {pseudo-variables}
 	 * used to display the calendar
 	 *
-	 * @access	public
 	 * @return	void
 	 */
-	function parse_template()
+	public function parse_template()
 	{
 		$this->temp = $this->default_template();
 

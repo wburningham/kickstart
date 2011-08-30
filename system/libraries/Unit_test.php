@@ -28,25 +28,25 @@
  */
 class CI_Unit_test {
 
-	var $active					= TRUE;
-	var $results				= array();
-	var $strict					= FALSE;
-	var $_template				= NULL;
-	var $_template_rows			= NULL;
-	var $_test_items_visible	= array();
+	public $active					= TRUE;
+	public $results					= array();
+	public $strict					= FALSE;
+	public $_template				= NULL;
+	public $_template_rows			= NULL;
+	public $_test_items_visible		= array();
 
 	public function __construct()
 	{
 		// These are the default items visible when a test is run.
 		$this->_test_items_visible = array (
-							'test_name',
-							'test_datatype',
-							'res_datatype',
-							'result',
-							'file',
-							'line',
-							'notes'
-						);
+			'test_name',
+			'test_datatype',
+			'res_datatype',
+			'result',
+			'file',
+			'line',
+			'notes'
+		);
 
 		log_message('debug', "Unit Testing Class Initialized");
 	}
@@ -58,11 +58,10 @@ class CI_Unit_test {
 	 *
 	 * Runs the supplied tests
 	 *
-	 * @access	public
 	 * @param	array
 	 * @return	void
 	 */
-	function set_test_items($items = array())
+	public function set_test_items($items = array())
 	{
 		if ( ! empty($items) AND is_array($items))
 		{
@@ -77,13 +76,13 @@ class CI_Unit_test {
 	 *
 	 * Runs the supplied tests
 	 *
-	 * @access	public
 	 * @param	mixed
 	 * @param	mixed
 	 * @param	string
 	 * @return	string
 	 */
-	function run($test, $expected = TRUE, $test_name = 'undefined', $notes = '')
+	public function run($test, $expected = TRUE, 
+						$test_name = 'undefined', $notes = '')
 	{
 		if ($this->active == FALSE)
 		{
@@ -99,24 +98,28 @@ class CI_Unit_test {
 		else
 		{
 			if ($this->strict == TRUE)
-				$result = ($test === $expected) ? TRUE : FALSE;
+			{
+				$result = ($test === $expected) ? TRUE : FALSE;				
+			}
 			else
-				$result = ($test == $expected) ? TRUE : FALSE;
+			{
+				$result = ($test == $expected) ? TRUE : FALSE;				
+			}
 
 			$extype = gettype($expected);
 		}
 
 		$back = $this->_backtrace();
 
-		$report[] = array (
-							'test_name'			=> $test_name,
-							'test_datatype'		=> gettype($test),
-							'res_datatype'		=> $extype,
-							'result'			=> ($result === TRUE) ? 'passed' : 'failed',
-							'file'				=> $back['file'],
-							'line'				=> $back['line'],
-							'notes'				=> $notes
-						);
+		$report[] = array(
+			'test_name'			=> $test_name,
+			'test_datatype'		=> gettype($test),
+			'res_datatype'		=> $extype,
+			'result'			=> ($result === TRUE) ? 'passed' : 'failed',
+			'file'				=> $back['file'],
+			'line'				=> $back['line'],
+			'notes'				=> $notes
+		);
 
 		$this->results[] = $report;
 
@@ -130,10 +133,9 @@ class CI_Unit_test {
 	 *
 	 * Displays a table with the test data
 	 *
-	 * @access	public
 	 * @return	string
 	 */
-	function report($result = array())
+	public function report($result = array())
 	{
 		if (count($result) == 0)
 		{
@@ -183,11 +185,10 @@ class CI_Unit_test {
 	 *
 	 * Causes the evaluation to use === rather than ==
 	 *
-	 * @access	public
 	 * @param	bool
 	 * @return	null
 	 */
-	function use_strict($state = TRUE)
+	public function use_strict($state = TRUE)
 	{
 		$this->strict = ($state == FALSE) ? FALSE : TRUE;
 	}
@@ -203,7 +204,7 @@ class CI_Unit_test {
 	 * @param	bool
 	 * @return	null
 	 */
-	function active($state = TRUE)
+	public function active($state = TRUE)
 	{
 		$this->active = ($state == FALSE) ? FALSE : TRUE;
 	}
@@ -218,7 +219,7 @@ class CI_Unit_test {
 	 * @access	public
 	 * @return	array
 	 */
-	function result($results = array())
+	public function result($results = array())
 	{
 		$CI =& get_instance();
 		$CI->load->language('unit_test');
@@ -273,11 +274,10 @@ class CI_Unit_test {
 	 *
 	 * This lets us set the template to be used to display results
 	 *
-	 * @access	public
 	 * @param	string
 	 * @return	void
 	 */
-	function set_template($template)
+	public function set_template($template)
 	{
 		$this->_template = $template;
 	}
@@ -289,10 +289,9 @@ class CI_Unit_test {
 	 *
 	 * This lets us show file names and line numbers
 	 *
-	 * @access	private
 	 * @return	array
 	 */
-	function _backtrace()
+	protected function _backtrace()
 	{
 		if (function_exists('debug_backtrace'))
 		{
@@ -303,6 +302,7 @@ class CI_Unit_test {
 
 			return array('file' => $file, 'line' => $line);
 		}
+		
 		return array('file' => 'Unknown', 'line' => 'Unknown');
 	}
 
@@ -311,10 +311,9 @@ class CI_Unit_test {
 	/**
 	 * Get Default Template
 	 *
-	 * @access	private
 	 * @return	string
 	 */
-	function _default_template()
+	protected function _default_template()
 	{
 		$this->_template = "\n".'<table style="width:100%; font-size:small; margin:10px 0; border-collapse:collapse; border:1px solid #CCC;">';
 		$this->_template .= '{rows}';
@@ -333,10 +332,9 @@ class CI_Unit_test {
 	 *
 	 * Harvests the data within the template {pseudo-variables}
 	 *
-	 * @access	private
 	 * @return	void
 	 */
-	function _parse_template()
+	protected function _parse_template()
 	{
 		if ( ! is_null($this->_template_rows))
 		{
@@ -364,20 +362,17 @@ class CI_Unit_test {
 
 /**
  * Helper functions to test boolean true/false
- *
- *
- * @access	private
  * @return	bool
  */
 function is_true($test)
 {
 	return (is_bool($test) AND $test === TRUE) ? TRUE : FALSE;
 }
+
 function is_false($test)
 {
 	return (is_bool($test) AND $test === FALSE) ? TRUE : FALSE;
 }
-
 
 /* End of file Unit_test.php */
 /* Location: ./system/libraries/Unit_test.php */

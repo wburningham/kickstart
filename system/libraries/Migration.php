@@ -105,7 +105,6 @@ class CI_Migration {
 			++$stop;
 			$step = 1;
 		}
-
 		else
 		{
 			// Moving Down
@@ -239,7 +238,6 @@ class CI_Migration {
 	/**
 	 * Set's the schema to the migration version set in config
 	 *
-	 * @access	public
 	 * @return	mixed	true if already current, false if failed, int if upgraded
 	 */
 	public function current()
@@ -252,7 +250,6 @@ class CI_Migration {
 	/**
 	 * Error string
 	 *
-	 * @access	public
 	 * @return	string	Error message returned as a string
 	 */
 	public function error_string()
@@ -294,7 +291,6 @@ class CI_Migration {
 	/**
 	 * Retrieves current schema version
 	 *
-	 * @access	protected
 	 * @return	integer	Current Migration
 	 */
 	protected function _get_version()
@@ -308,7 +304,6 @@ class CI_Migration {
 	/**
 	 * Stores the current schema version
 	 *
-	 * @access	protected
 	 * @param $migrations integer	Migration reached
 	 * @return	void					Outputs a report of the migration
 	 */
@@ -324,7 +319,6 @@ class CI_Migration {
 	/**
 	 * Enable the use of CI super-global
 	 *
-	 * @access	public
 	 * @param $var
 	 * @return	mixed
 	 */

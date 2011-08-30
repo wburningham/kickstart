@@ -26,26 +26,26 @@
  */
 class CI_Session {
 
-	var $sess_encrypt_cookie		= FALSE;
-	var $sess_use_database			= FALSE;
-	var $sess_table_name			= '';
-	var $sess_expiration			= 7200;
-	var $sess_expire_on_close		= FALSE;
-	var $sess_match_ip				= FALSE;
-	var $sess_match_useragent		= TRUE;
-	var $sess_cookie_name			= 'ci_session';
-	var $cookie_prefix				= '';
-	var $cookie_path				= '';
-	var $cookie_domain				= '';
-	var $cookie_secure				= FALSE;
-	var $sess_time_to_update		= 300;
-	var $encryption_key				= '';
-	var $flashdata_key				= 'flash';
-	var $time_reference				= 'time';
-	var $gc_probability				= 5;
-	var $userdata					= array();
-	var $CI;
-	var $now;
+	public $sess_encrypt_cookie		= FALSE;
+	public $sess_use_database			= FALSE;
+	public $sess_table_name			= '';
+	public $sess_expiration			= 7200;
+	public $sess_expire_on_close		= FALSE;
+	public $sess_match_ip				= FALSE;
+	public $sess_match_useragent		= TRUE;
+	public $sess_cookie_name			= 'ci_session';
+	public $cookie_prefix				= '';
+	public $cookie_path				= '';
+	public $cookie_domain				= '';
+	public $cookie_secure				= FALSE;
+	public $sess_time_to_update		= 300;
+	public $encryption_key				= '';
+	public $flashdata_key				= 'flash';
+	public $time_reference				= 'time';
+	public $gc_probability				= 5;
+	public $userdata					= array();
+	public $CI;
+	public $now;
 
 	/**
 	 * Session Constructor
@@ -129,10 +129,9 @@ class CI_Session {
 	/**
 	 * Fetch the current session data if it exists
 	 *
-	 * @access	public
 	 * @return	bool
 	 */
-	function sess_read()
+	public function sess_read()
 	{
 		// Fetch the cookie
 		$session = $this->CI->input->cookie($this->sess_cookie_name);
@@ -247,10 +246,9 @@ class CI_Session {
 	/**
 	 * Write the session data
 	 *
-	 * @access	public
 	 * @return	void
 	 */
-	function sess_write()
+	public function sess_write()
 	{
 		// Are we saving custom data to the DB?  If not, all we do is update the cookie
 		if ($this->sess_use_database === FALSE)
@@ -299,10 +297,9 @@ class CI_Session {
 	/**
 	 * Create a new session
 	 *
-	 * @access	public
 	 * @return	void
 	 */
-	function sess_create()
+	public function sess_create()
 	{
 		$sessid = '';
 		while (strlen($sessid) < 32)
@@ -336,10 +333,9 @@ class CI_Session {
 	/**
 	 * Update an existing session
 	 *
-	 * @access	public
 	 * @return	void
 	 */
-	function sess_update()
+	public function sess_update()
 	{
 		// We only update the session every five minutes by default
 		if (($this->userdata['last_activity'] + $this->sess_time_to_update) >= $this->now)
@@ -392,10 +388,9 @@ class CI_Session {
 	/**
 	 * Destroy the current session
 	 *
-	 * @access	public
 	 * @return	void
 	 */
-	function sess_destroy()
+	public function sess_destroy()
 	{
 		// Kill the session DB row
 		if ($this->sess_use_database === TRUE AND isset($this->userdata['session_id']))
@@ -420,11 +415,10 @@ class CI_Session {
 	/**
 	 * Fetch a specific item from the session array
 	 *
-	 * @access	public
 	 * @param	string
 	 * @return	string
 	 */
-	function userdata($item)
+	public function userdata($item)
 	{
 		return ( ! isset($this->userdata[$item])) ? FALSE : $this->userdata[$item];
 	}
@@ -434,10 +428,9 @@ class CI_Session {
 	/**
 	 * Fetch all session data
 	 *
-	 * @access	public
 	 * @return	array
 	 */
-	function all_userdata()
+	public function all_userdata()
 	{
 		return $this->userdata;
 	}
@@ -447,12 +440,11 @@ class CI_Session {
 	/**
 	 * Add or change data in the "userdata" array
 	 *
-	 * @access	public
 	 * @param	mixed
 	 * @param	string
 	 * @return	void
 	 */
-	function set_userdata($newdata = array(), $newval = '')
+	public function set_userdata($newdata = array(), $newval = '')
 	{
 		if (is_string($newdata))
 		{
@@ -475,10 +467,9 @@ class CI_Session {
 	/**
 	 * Delete a session variable from the "userdata" array
 	 *
-	 * @access	array
 	 * @return	void
 	 */
-	function unset_userdata($newdata = array())
+	public function unset_userdata($newdata = array())
 	{
 		if (is_string($newdata))
 		{
@@ -502,12 +493,11 @@ class CI_Session {
 	 * Add or change flashdata, only available
 	 * until the next request
 	 *
-	 * @access	public
 	 * @param	mixed
 	 * @param	string
 	 * @return	void
 	 */
-	function set_flashdata($newdata = array(), $newval = '')
+	public function set_flashdata($newdata = array(), $newval = '')
 	{
 		if (is_string($newdata))
 		{
@@ -529,11 +519,10 @@ class CI_Session {
 	/**
 	 * Keeps existing flashdata available to next request.
 	 *
-	 * @access	public
 	 * @param	string
 	 * @return	void
 	 */
-	function keep_flashdata($key)
+	public function keep_flashdata($key)
 	{
 		// 'old' flashdata gets removed.  Here we mark all
 		// flashdata as 'new' to preserve it from _flashdata_sweep()
@@ -551,11 +540,10 @@ class CI_Session {
 	/**
 	 * Fetch a specific flashdata item from the session array
 	 *
-	 * @access	public
 	 * @param	string
 	 * @return	string
 	 */
-	function flashdata($key)
+	public function flashdata($key)
 	{
 		$flashdata_key = $this->flashdata_key.':old:'.$key;
 		return $this->userdata($flashdata_key);
@@ -567,10 +555,9 @@ class CI_Session {
 	 * Identifies flashdata as 'old' for removal
 	 * when _flashdata_sweep() runs.
 	 *
-	 * @access	private
 	 * @return	void
 	 */
-	function _flashdata_mark()
+	protected function _flashdata_mark()
 	{
 		$userdata = $this->all_userdata();
 		foreach ($userdata as $name => $value)
@@ -590,11 +577,9 @@ class CI_Session {
 	/**
 	 * Removes all flashdata marked as 'old'
 	 *
-	 * @access	private
 	 * @return	void
 	 */
-
-	function _flashdata_sweep()
+	protected function _flashdata_sweep()
 	{
 		$userdata = $this->all_userdata();
 		foreach ($userdata as $key => $value)
@@ -612,19 +597,23 @@ class CI_Session {
 	/**
 	 * Get the "now" time
 	 *
-	 * @access	private
 	 * @return	string
 	 */
-	function _get_time()
+	protected function _get_time()
 	{
+		$time = time();
+		
 		if (strtolower($this->time_reference) == 'gmt')
 		{
 			$now = time();
-			$time = mktime(gmdate("H", $now), gmdate("i", $now), gmdate("s", $now), gmdate("m", $now), gmdate("d", $now), gmdate("Y", $now));
-		}
-		else
-		{
-			$time = time();
+			$time = mktime(
+				gmdate("H", $now), 
+				gmdate("i", $now), 
+				gmdate("s", $now), 
+				gmdate("m", $now), 
+				gmdate("d", $now), 
+				gmdate("Y", $now)
+			);
 		}
 
 		return $time;
@@ -635,10 +624,9 @@ class CI_Session {
 	/**
 	 * Write the session cookie
 	 *
-	 * @access	public
 	 * @return	void
 	 */
-	function _set_cookie($cookie_data = NULL)
+	protected function _set_cookie($cookie_data = NULL)
 	{
 		if (is_null($cookie_data))
 		{
@@ -662,13 +650,13 @@ class CI_Session {
 
 		// Set the cookie
 		setcookie(
-					$this->sess_cookie_name,
-					$cookie_data,
-					$expire,
-					$this->cookie_path,
-					$this->cookie_domain,
-					$this->cookie_secure
-				);
+			$this->sess_cookie_name,
+			$cookie_data,
+			$expire,
+			$this->cookie_path,
+			$this->cookie_domain,
+			$this->cookie_secure
+		);
 	}
 
 	// --------------------------------------------------------------------
@@ -679,11 +667,10 @@ class CI_Session {
 	 * This function first converts any slashes found in the array to a temporary
 	 * marker, so when it gets unserialized the slashes will be preserved
 	 *
-	 * @access	private
 	 * @param	array
 	 * @return	string
 	 */
-	function _serialize($data)
+	protected function _serialize($data)
 	{
 		if (is_array($data))
 		{
@@ -714,11 +701,10 @@ class CI_Session {
 	 * This function unserializes a data string, then converts any
 	 * temporary slash markers back to actual slashes
 	 *
-	 * @access	private
 	 * @param	array
 	 * @return	string
 	 */
-	function _unserialize($data)
+	protected function _unserialize($data)
 	{
 		$data = @unserialize(strip_slashes($data));
 
@@ -746,10 +732,9 @@ class CI_Session {
 	 * This deletes expired session rows from database
 	 * if the probability percentage is met
 	 *
-	 * @access	public
 	 * @return	void
 	 */
-	function _sess_gc()
+	protected function _sess_gc()
 	{
 		if ($this->sess_use_database != TRUE)
 		{
@@ -767,8 +752,6 @@ class CI_Session {
 			log_message('debug', 'Session garbage collection performed.');
 		}
 	}
-
-
 }
 // END Session Class
 

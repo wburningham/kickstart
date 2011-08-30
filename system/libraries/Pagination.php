@@ -26,43 +26,42 @@
  */
 class CI_Pagination {
 
-	var $base_url			= ''; // The page we are linking to
-	var $prefix				= ''; // A custom prefix added to the path.
-	var $suffix				= ''; // A custom suffix added to the path.
+	public $base_url			= ''; // The page we are linking to
+	public $prefix				= ''; // A custom prefix added to the path.
+	public $suffix				= ''; // A custom suffix added to the path.
 
-	var $total_rows			=  0; // Total number of items (database results)
-	var $per_page			= 10; // Max number of items you want shown per page
-	var $num_links			=  2; // Number of "digit" links to show before/after the currently viewed page
-	var $cur_page			=  0; // The current page being viewed
-	var $first_link			= '&lsaquo; First';
-	var $next_link			= '&gt;';
-	var $prev_link			= '&lt;';
-	var $last_link			= 'Last &rsaquo;';
-	var $uri_segment		= 3;
-	var $full_tag_open		= '';
-	var $full_tag_close		= '';
-	var $first_tag_open		= '';
-	var $first_tag_close	= '&nbsp;';
-	var $last_tag_open		= '&nbsp;';
-	var $last_tag_close		= '';
-	var $first_url			= ''; // Alternative URL for the First Page.
-	var $cur_tag_open		= '&nbsp;<strong>';
-	var $cur_tag_close		= '</strong>';
-	var $next_tag_open		= '&nbsp;';
-	var $next_tag_close		= '&nbsp;';
-	var $prev_tag_open		= '&nbsp;';
-	var $prev_tag_close		= '';
-	var $num_tag_open		= '&nbsp;';
-	var $num_tag_close		= '';
-	var $page_query_string	= FALSE;
-	var $query_string_segment = 'per_page';
-	var $display_pages		= TRUE;
-	var $anchor_class		= '';
+	public $total_rows			=  0; // Total number of items (database results)
+	public $per_page			= 10; // Max number of items you want shown per page
+	public $num_links			=  2; // Number of "digit" links to show before/after the currently viewed page
+	public $cur_page			=  0; // The current page being viewed
+	public $first_link			= '&lsaquo; First';
+	public $next_link			= '&gt;';
+	public $prev_link			= '&lt;';
+	public $last_link			= 'Last &rsaquo;';
+	public $uri_segment			= 3;
+	public $full_tag_open		= '';
+	public $full_tag_close		= '';
+	public $first_tag_open		= '';
+	public $first_tag_close		= '&nbsp;';
+	public $last_tag_open		= '&nbsp;';
+	public $last_tag_close		= '';
+	public $first_url			= ''; // Alternative URL for the First Page.
+	public $cur_tag_open		= '&nbsp;<strong>';
+	public $cur_tag_close		= '</strong>';
+	public $next_tag_open		= '&nbsp;';
+	public $next_tag_close		= '&nbsp;';
+	public $prev_tag_open		= '&nbsp;';
+	public $prev_tag_close		= '';
+	public $num_tag_open		= '&nbsp;';
+	public $num_tag_close		= '';
+	public $page_query_string	= FALSE;
+	public $query_string_segment = 'per_page';
+	public $display_pages		= TRUE;
+	public $anchor_class		= '';
 
 	/**
 	 * Constructor
 	 *
-	 * @access	public
 	 * @param	array	initialization parameters
 	 */
 	public function __construct($params = array())
@@ -85,11 +84,10 @@ class CI_Pagination {
 	/**
 	 * Initialize Preferences
 	 *
-	 * @access	public
 	 * @param	array	initialization parameters
 	 * @return	void
 	 */
-	function initialize($params = array())
+	public function initialize($params = array())
 	{
 		if (count($params) > 0)
 		{
@@ -108,10 +106,9 @@ class CI_Pagination {
 	/**
 	 * Generate the pagination links
 	 *
-	 * @access	public
 	 * @return	string
 	 */
-	function create_links()
+	public function create_links()
 	{
 		// If our item count or per-page total is zero there is no need to continue.
 		if ($this->total_rows == 0 OR $this->per_page == 0)

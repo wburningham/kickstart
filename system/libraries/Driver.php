@@ -166,7 +166,6 @@ class CI_Driver {
 	 *
 	 * Handles access to the parent driver library's methods
 	 *
-	 * @access	public
 	 * @param	string
 	 * @param	array
 	 * @return	mixed

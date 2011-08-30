@@ -1,4 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 /**
  * CodeIgniter
  *
@@ -32,12 +33,12 @@
  */
 class CI_Zip  {
 
-	var $zipdata	= '';
-	var $directory	= '';
-	var $entries	= 0;
-	var $file_num	= 0;
-	var $offset		= 0;
-	var $now;
+	public $zipdata = '';
+	public $directory = '';
+	public $entries = 0;
+	public $file_num = 0;
+	public $offset = 0;
+	public $now;
 
 	/**
 	 * Constructor
@@ -56,11 +57,10 @@ class CI_Zip  {
 	 *
 	 * Lets you add a virtual directory into which you can place files.
 	 *
-	 * @access	public
 	 * @param	mixed	the directory name. Can be string or array
 	 * @return	void
 	 */
-	function add_dir($directory)
+	public function add_dir($directory)
 	{
 		foreach ((array)$directory as $dir)
 		{
@@ -85,7 +85,7 @@ class CI_Zip  {
 	 *	@param string	path to file
 	 *	@return array	filemtime/filemdate
 	 */
-	function _get_mod_time($dir)
+	protected function _get_mod_time($dir)
 	{
 		// filemtime() will return false, but it does raise an error.
 		$date = (@filemtime($dir)) ? filemtime($dir) : getdate($this->now);
@@ -101,11 +101,10 @@ class CI_Zip  {
 	/**
 	 * Add Directory
 	 *
-	 * @access	private
 	 * @param	string	the directory name
 	 * @return	void
 	 */
-	function _add_dir($dir, $file_mtime, $file_mdate)
+	protected function _add_dir($dir, $file_mtime, $file_mdate)
 	{
 		$dir = str_replace("\\", "/", $dir);
 
@@ -153,12 +152,11 @@ class CI_Zip  {
 	 * in the filename it will be placed within a directory.  Make
 	 * sure you use add_dir() first to create the folder.
 	 *
-	 * @access	public
 	 * @param	mixed
 	 * @param	string
 	 * @return	void
 	 */
-	function add_data($filepath, $data = NULL)
+	public function add_data($filepath, $data = NULL)
 	{
 		if (is_array($filepath))
 		{
@@ -182,12 +180,11 @@ class CI_Zip  {
 	/**
 	 * Add Data to Zip
 	 *
-	 * @access	private
 	 * @param	string	the file name/path
 	 * @param	string	the data to be encoded
 	 * @return	void
 	 */
-	function _add_data($filepath, $data, $file_mtime, $file_mdate)
+	protected function _add_data($filepath, $data, $file_mtime, $file_mdate)
 	{
 		$filepath = str_replace("\\", "/", $filepath);
 
@@ -236,10 +233,9 @@ class CI_Zip  {
 	/**
 	 * Read the contents of a file and add it to the zip
 	 *
-	 * @access	public
 	 * @return	bool
 	 */
-	function read_file($path, $preserve_filepath = FALSE)
+	public function read_file($path, $preserve_filepath = FALSE)
 	{
 		if ( ! file_exists($path))
 		{
@@ -258,6 +254,7 @@ class CI_Zip  {
 			$this->add_data($name, $data);
 			return TRUE;
 		}
+		
 		return FALSE;
 	}
 
@@ -270,11 +267,11 @@ class CI_Zip  {
 	 * sub-folders) and creates a zip based on it.  Whatever directory structure
 	 * is in the original file path will be recreated in the zip file.
 	 *
-	 * @access	public
 	 * @param	string	path to source
 	 * @return	bool
 	 */
-	function read_dir($path, $preserve_filepath = TRUE, $root_path = NULL)
+	public function read_dir($path, $preserve_filepath = TRUE, 
+							 $root_path = NULL)
 	{
 		if ( ! $fp = @opendir($path))
 		{
@@ -322,10 +319,9 @@ class CI_Zip  {
 	/**
 	 * Get the Zip file
 	 *
-	 * @access	public
 	 * @return	binary string
 	 */
-	function get_zip()
+	public function get_zip()
 	{
 		// Is there any data to return?
 		if ($this->entries == 0)
@@ -351,11 +347,10 @@ class CI_Zip  {
 	 *
 	 * Lets you write a file
 	 *
-	 * @access	public
 	 * @param	string	the file name
 	 * @return	bool
 	 */
-	function archive($filepath)
+	public function archive($filepath)
 	{
 		if ( ! ($fp = @fopen($filepath, FOPEN_WRITE_CREATE_DESTRUCTIVE)))
 		{
@@ -375,12 +370,11 @@ class CI_Zip  {
 	/**
 	 * Download
 	 *
-	 * @access	public
 	 * @param	string	the file name
 	 * @param	string	the data to be encoded
 	 * @return	bool
 	 */
-	function download($filename = 'backup.zip')
+	public function download($filename = 'backup.zip')
 	{
 		if ( ! preg_match("|.+?\.zip$|", $filename))
 		{
@@ -405,10 +399,9 @@ class CI_Zip  {
 	 * Lets you clear current zip data.  Useful if you need to create
 	 * multiple zips with different data.
 	 *
-	 * @access	public
 	 * @return	void
 	 */
-	function clear_data()
+	public function clear_data()
 	{
 		$this->zipdata		= '';
 		$this->directory	= '';
@@ -417,6 +410,7 @@ class CI_Zip  {
 		$this->offset		= 0;
 	}
 
+	// --------------------------------------------------------------------
 }
 
 /* End of file Zip.php */

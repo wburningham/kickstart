@@ -33,17 +33,17 @@
 class CI_Profiler {
 
 	protected $_available_sections = array(
-										'benchmarks',
-										'get',
-										'memory_usage',
-										'post',
-										'uri_string',
-										'controller_info',
-										'queries',
-										'http_headers',
-										'session_data',
-										'config'
-										);
+		'benchmarks',
+		'get',
+		'memory_usage',
+		'post',
+		'uri_string',
+		'controller_info',
+		'queries',
+		'http_headers',
+		'session_data',
+		'config'
+	);
 
 	protected $_query_toggle_count = 25;
 
@@ -93,6 +93,8 @@ class CI_Profiler {
 				$this->_compile_{$method} = ($enable !== FALSE) ? TRUE : FALSE;
 			}
 		}
+		
+		return $this;
 	}
 
 	// --------------------------------------------------------------------
@@ -239,7 +241,6 @@ class CI_Profiler {
 		return $output;
 	}
 
-
 	// --------------------------------------------------------------------
 
 	/**
@@ -333,6 +334,7 @@ class CI_Profiler {
 
 			$output .= "</table>\n";
 		}
+		
 		$output .= "</fieldset>";
 
 		return $output;

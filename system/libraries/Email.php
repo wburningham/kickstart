@@ -28,54 +28,59 @@
  */
 class CI_Email {
 
-	var	$useragent		= "CodeIgniter";
-	var	$mailpath		= "/usr/sbin/sendmail";	// Sendmail path
-	var	$protocol		= "mail";	// mail/sendmail/smtp
-	var	$smtp_host		= "";		// SMTP Server.  Example: mail.earthlink.net
-	var	$smtp_user		= "";		// SMTP Username
-	var	$smtp_pass		= "";		// SMTP Password
-	var	$smtp_port		= "25";		// SMTP Port
-	var	$smtp_timeout	= 5;		// SMTP Timeout in seconds
-	var	$wordwrap		= TRUE;		// TRUE/FALSE  Turns word-wrap on/off
-	var	$wrapchars		= "76";		// Number of characters to wrap at.
-	var	$mailtype		= "text";	// text/html  Defines email formatting
-	var	$charset		= "utf-8";	// Default char set: iso-8859-1 or us-ascii
-	var	$multipart		= "mixed";	// "mixed" (in the body) or "related" (separate)
-	var $alt_message	= '';		// Alternative message for HTML emails
-	var	$validate		= FALSE;	// TRUE/FALSE.  Enables email validation
-	var	$priority		= "3";		// Default priority (1 - 5)
-	var	$newline		= "\n";		// Default newline. "\r\n" or "\n" (Use "\r\n" to comply with RFC 822)
-	var $crlf			= "\n";		// The RFC 2045 compliant CRLF for quoted-printable is "\r\n".  Apparently some servers,
+	public	$useragent		= "CodeIgniter";
+	public	$mailpath		= "/usr/sbin/sendmail";	// Sendmail path
+	public	$protocol		= "mail";	// mail/sendmail/smtp
+	public	$smtp_host		= "";		// SMTP Server.  Example: mail.earthlink.net
+	public	$smtp_user		= "";		// SMTP Username
+	public	$smtp_pass		= "";		// SMTP Password
+	public	$smtp_port		= "25";		// SMTP Port
+	public	$smtp_timeout	= 5;		// SMTP Timeout in seconds
+	public	$wordwrap		= TRUE;		// TRUE/FALSE  Turns word-wrap on/off
+	public	$wrapchars		= "76";		// Number of characters to wrap at.
+	public	$mailtype		= "text";	// text/html  Defines email formatting
+	public	$charset		= "utf-8";	// Default char set: iso-8859-1 or us-ascii
+	public	$multipart		= "mixed";	// "mixed" (in the body) or "related" (separate)
+	public $alt_message	= '';		// Alternative message for HTML emails
+	public	$validate		= FALSE;	// TRUE/FALSE.  Enables email validation
+	public	$priority		= "3";		// Default priority (1 - 5)
+	public	$newline		= "\n";		// Default newline. "\r\n" or "\n" (Use "\r\n" to comply with RFC 822)
+	public $crlf			= "\n";		// The RFC 2045 compliant CRLF for quoted-printable is "\r\n".  Apparently some servers,
 									// even on the receiving end think they need to muck with CRLFs, so using "\n", while
 									// distasteful, is the only thing that seems to work for all environments.
-	var $send_multipart	= TRUE;		// TRUE/FALSE - Yahoo does not like multipart alternative, so this is an override.  Set to FALSE for Yahoo.
-	var	$bcc_batch_mode	= FALSE;	// TRUE/FALSE  Turns on/off Bcc batch feature
-	var	$bcc_batch_size	= 200;		// If bcc_batch_mode = TRUE, sets max number of Bccs in each batch
-	var $_safe_mode		= FALSE;
-	var	$_subject		= "";
-	var	$_body			= "";
-	var	$_finalbody		= "";
-	var	$_alt_boundary	= "";
-	var	$_atc_boundary	= "";
-	var	$_header_str	= "";
-	var	$_smtp_connect	= "";
-	var	$_encoding		= "8bit";
-	var $_IP			= FALSE;
-	var	$_smtp_auth		= FALSE;
-	var $_replyto_flag	= FALSE;
-	var	$_debug_msg		= array();
-	var	$_recipients	= array();
-	var	$_cc_array		= array();
-	var	$_bcc_array		= array();
-	var	$_headers		= array();
-	var	$_attach_name	= array();
-	var	$_attach_type	= array();
-	var	$_attach_disp	= array();
-	var	$_protocols		= array('mail', 'sendmail', 'smtp');
-	var	$_base_charsets	= array('us-ascii', 'iso-2022-');	// 7-bit charsets (excluding language suffix)
-	var	$_bit_depths	= array('7bit', '8bit');
-	var	$_priorities	= array('1 (Highest)', '2 (High)', '3 (Normal)', '4 (Low)', '5 (Lowest)');
-
+	public $send_multipart	= TRUE;		// TRUE/FALSE - Yahoo does not like multipart alternative, so this is an override.  Set to FALSE for Yahoo.
+	public	$bcc_batch_mode	= FALSE;	// TRUE/FALSE  Turns on/off Bcc batch feature
+	public	$bcc_batch_size	= 200;		// If bcc_batch_mode = TRUE, sets max number of Bccs in each batch
+	public $_safe_mode		= FALSE;
+	public	$_subject		= "";
+	public	$_body			= "";
+	public	$_finalbody		= "";
+	public	$_alt_boundary	= "";
+	public	$_atc_boundary	= "";
+	public	$_header_str	= "";
+	public	$_smtp_connect	= "";
+	public	$_encoding		= "8bit";
+	public $_IP			= FALSE;
+	public	$_smtp_auth		= FALSE;
+	public $_replyto_flag	= FALSE;
+	public	$_debug_msg		= array();
+	public	$_recipients	= array();
+	public	$_cc_array		= array();
+	public	$_bcc_array		= array();
+	public	$_headers		= array();
+	public	$_attach_name	= array();
+	public	$_attach_type	= array();
+	public	$_attach_disp	= array();
+	public	$_protocols		= array('mail', 'sendmail', 'smtp');
+	public	$_base_charsets	= array('us-ascii', 'iso-2022-');	// 7-bit charsets (excluding language suffix)
+	public	$_bit_depths	= array('7bit', '8bit');
+	public	$_priorities	= array(
+		'1 (Highest)', 
+		'2 (High)', 
+		'3 (Normal)', 
+		'4 (Low)', 
+		'5 (Lowest)'
+	);
 
 	/**
 	 * Constructor - Sets Email Preferences
@@ -102,7 +107,6 @@ class CI_Email {
 	/**
 	 * Initialize preferences
 	 *
-	 * @access	public
 	 * @param	array
 	 * @return	void
 	 */
@@ -137,7 +141,6 @@ class CI_Email {
 	/**
 	 * Initialize the Email Data
 	 *
-	 * @access	public
 	 * @return	void
 	 */
 	public function clear($clear_attachments = FALSE)
@@ -171,7 +174,6 @@ class CI_Email {
 	/**
 	 * Set FROM
 	 *
-	 * @access	public
 	 * @param	string
 	 * @param	string
 	 * @return	void
@@ -214,7 +216,6 @@ class CI_Email {
 	/**
 	 * Set Reply-to
 	 *
-	 * @access	public
 	 * @param	string
 	 * @param	string
 	 * @return	void
@@ -251,8 +252,7 @@ class CI_Email {
 
 	/**
 	 * Set Recipients
-	 *
-	 * @access	public
+	 
 	 * @param	string
 	 * @return	void
 	 */
@@ -290,7 +290,6 @@ class CI_Email {
 	/**
 	 * Set CC
 	 *
-	 * @access	public
 	 * @param	string
 	 * @return	void
 	 */
@@ -319,7 +318,6 @@ class CI_Email {
 	/**
 	 * Set BCC
 	 *
-	 * @access	public
 	 * @param	string
 	 * @param	string
 	 * @return	void
@@ -357,7 +355,6 @@ class CI_Email {
 	/**
 	 * Set Email Subject
 	 *
-	 * @access	public
 	 * @param	string
 	 * @return	void
 	 */
@@ -373,7 +370,6 @@ class CI_Email {
 	/**
 	 * Set Body
 	 *
-	 * @access	public
 	 * @param	string
 	 * @return	void
 	 */
@@ -388,7 +384,6 @@ class CI_Email {
 	/**
 	 * Assign file attachments
 	 *
-	 * @access	public
 	 * @param	string
 	 * @return	void
 	 */
@@ -405,7 +400,6 @@ class CI_Email {
 	/**
 	 * Add a Header Item
 	 *
-	 * @access	protected
 	 * @param	string
 	 * @param	string
 	 * @return	void
@@ -420,7 +414,6 @@ class CI_Email {
 	/**
 	 * Convert a String to an Array
 	 *
-	 * @access	protected
 	 * @param	string
 	 * @return	array
 	 */
@@ -438,6 +431,7 @@ class CI_Email {
 				settype($email, "array");
 			}
 		}
+		
 		return $email;
 	}
 
@@ -446,7 +440,6 @@ class CI_Email {
 	/**
 	 * Set Multipart Value
 	 *
-	 * @access	public
 	 * @param	string
 	 * @return	void
 	 */
@@ -461,7 +454,6 @@ class CI_Email {
 	/**
 	 * Set Mailtype
 	 *
-	 * @access	public
 	 * @param	string
 	 * @return	void
 	 */
@@ -476,7 +468,6 @@ class CI_Email {
 	/**
 	 * Set Wordwrap
 	 *
-	 * @access	public
 	 * @param	bool
 	 * @return	void
 	 */
@@ -491,7 +482,6 @@ class CI_Email {
 	/**
 	 * Set Protocol
 	 *
-	 * @access	public
 	 * @param	string
 	 * @return	void
 	 */
@@ -506,7 +496,6 @@ class CI_Email {
 	/**
 	 * Set Priority
 	 *
-	 * @access	public
 	 * @param	integer
 	 * @return	void
 	 */
@@ -533,7 +522,6 @@ class CI_Email {
 	/**
 	 * Set Newline Character
 	 *
-	 * @access	public
 	 * @param	string
 	 * @return	void
 	 */
@@ -555,7 +543,6 @@ class CI_Email {
 	/**
 	 * Set CRLF
 	 *
-	 * @access	public
 	 * @param	string
 	 * @return	void
 	 */
@@ -577,7 +564,6 @@ class CI_Email {
 	/**
 	 * Set Message Boundary
 	 *
-	 * @access	protected
 	 * @return	void
 	 */
 	protected function _set_boundaries()
@@ -591,7 +577,6 @@ class CI_Email {
 	/**
 	 * Get the Message ID
 	 *
-	 * @access	protected
 	 * @return	string
 	 */
 	protected function _get_message_id()
@@ -608,7 +593,6 @@ class CI_Email {
 	/**
 	 * Get Mail Protocol
 	 *
-	 * @access	protected
 	 * @param	bool
 	 * @return	string
 	 */
@@ -628,7 +612,6 @@ class CI_Email {
 	/**
 	 * Get Mail Encoding
 	 *
-	 * @access	protected
 	 * @param	bool
 	 * @return	string
 	 */
@@ -655,7 +638,6 @@ class CI_Email {
 	/**
 	 * Get content type (text/html/attachment)
 	 *
-	 * @access	protected
 	 * @return	string
 	 */
 	protected function _get_content_type()
@@ -683,7 +665,6 @@ class CI_Email {
 	/**
 	 * Set RFC 822 Date
 	 *
-	 * @access	protected
 	 * @return	string
 	 */
 	protected function _set_date()
@@ -701,7 +682,6 @@ class CI_Email {
 	/**
 	 * Mime message
 	 *
-	 * @access	protected
 	 * @return	string
 	 */
 	protected function _get_mime_message()
@@ -714,7 +694,6 @@ class CI_Email {
 	/**
 	 * Validate Email Address
 	 *
-	 * @access	public
 	 * @param	string
 	 * @return	bool
 	 */
@@ -743,7 +722,6 @@ class CI_Email {
 	/**
 	 * Email Validation
 	 *
-	 * @access	public
 	 * @param	string
 	 * @return	bool
 	 */
@@ -757,7 +735,6 @@ class CI_Email {
 	/**
 	 * Clean Extended Email Address: Joe Smith <joe@smith.com>
 	 *
-	 * @access	public
 	 * @param	string
 	 * @return	string
 	 */
@@ -802,7 +779,6 @@ class CI_Email {
 	 * If the user hasn't specified his own alternative message
 	 * it creates one by stripping the HTML
 	 *
-	 * @access	protected
 	 * @return	string
 	 */
 	protected function _get_alt_message()
@@ -845,7 +821,6 @@ class CI_Email {
 	/**
 	 * Word Wrap
 	 *
-	 * @access	public
 	 * @param	string
 	 * @param	integer
 	 * @return	string
@@ -941,7 +916,6 @@ class CI_Email {
 	/**
 	 * Build final headers
 	 *
-	 * @access	protected
 	 * @param	string
 	 * @return	string
 	 */
@@ -959,7 +933,6 @@ class CI_Email {
 	/**
 	 * Write Headers as a string
 	 *
-	 * @access	protected
 	 * @return	void
 	 */
 	protected function _write_headers()
@@ -994,7 +967,6 @@ class CI_Email {
 	/**
 	 * Build Final Body and attachments
 	 *
-	 * @access	protected
 	 * @return	void
 	 */
 	protected function _build_message()
@@ -1177,7 +1149,6 @@ class CI_Email {
 	 * Prepares string for Quoted-Printable Content-Transfer-Encoding
 	 * Refer to RFC 2045 http://www.ietf.org/rfc/rfc2045.txt
 	 *
-	 * @access	protected
 	 * @param	string
 	 * @param	integer
 	 * @return	string
@@ -1270,7 +1241,6 @@ class CI_Email {
 	 * Performs "Q Encoding" on a string for use in email headers.  It's related
 	 * but not identical to quoted-printable, so it has its own method
 	 *
-	 * @access	public
 	 * @param	str
 	 * @param	bool	// set to TRUE for processing From: headers
 	 * @return	str
@@ -1339,7 +1309,6 @@ class CI_Email {
 	/**
 	 * Send Email
 	 *
-	 * @access	public
 	 * @return	bool
 	 */
 	public function send()
@@ -1367,14 +1336,7 @@ class CI_Email {
 
 		$this->_build_message();
 
-		if ( ! $this->_spool_email())
-		{
-			return FALSE;
-		}
-		else
-		{
-			return TRUE;
-		}
+		return ( ! $this->_spool_email()) ? FALSE : TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -1382,7 +1344,6 @@ class CI_Email {
 	/**
 	 * Batch Bcc Send.  Sends groups of BCCs in batches
 	 *
-	 * @access	public
 	 * @return	bool
 	 */
 	public function batch_bcc_send()
@@ -1440,7 +1401,6 @@ class CI_Email {
 	/**
 	 * Unwrap special elements
 	 *
-	 * @access	protected
 	 * @return	void
 	 */
 	protected function _unwrap_specials()
@@ -1453,7 +1413,6 @@ class CI_Email {
 	/**
 	 * Strip line-breaks via callback
 	 *
-	 * @access	protected
 	 * @return	string
 	 */
 	protected function _remove_nl_callback($matches)
@@ -1471,7 +1430,6 @@ class CI_Email {
 	/**
 	 * Spool mail to the mail server
 	 *
-	 * @access	protected
 	 * @return	bool
 	 */
 	protected function _spool_email()
@@ -1516,7 +1474,6 @@ class CI_Email {
 	/**
 	 * Send using mail()
 	 *
-	 * @access	protected
 	 * @return	bool
 	 */
 	protected function _send_with_mail()
@@ -1527,10 +1484,8 @@ class CI_Email {
 			{
 				return FALSE;
 			}
-			else
-			{
-				return TRUE;
-			}
+
+			return TRUE;
 		}
 		else
 		{
@@ -1541,10 +1496,8 @@ class CI_Email {
 			{
 				return FALSE;
 			}
-			else
-			{
-				return TRUE;
-			}
+
+			return TRUE;
 		}
 	}
 
@@ -1553,7 +1506,6 @@ class CI_Email {
 	/**
 	 * Send using Sendmail
 	 *
-	 * @access	protected
 	 * @return	bool
 	 */
 	protected function _send_with_sendmail()
@@ -1591,7 +1543,6 @@ class CI_Email {
 	/**
 	 * Send using SMTP
 	 *
-	 * @access	protected
 	 * @return	bool
 	 */
 	protected function _send_with_smtp()
@@ -1660,7 +1611,6 @@ class CI_Email {
 	/**
 	 * SMTP Connect
 	 *
-	 * @access	protected
 	 * @param	string
 	 * @return	string
 	 */
@@ -1687,7 +1637,6 @@ class CI_Email {
 	/**
 	 * Send SMTP command
 	 *
-	 * @access	protected
 	 * @param	string
 	 * @param	string
 	 * @return	string
@@ -1754,7 +1703,6 @@ class CI_Email {
 	/**
 	 *  SMTP Authenticate
 	 *
-	 * @access	protected
 	 * @return	bool
 	 */
 	protected function _smtp_authenticate()
@@ -1808,7 +1756,6 @@ class CI_Email {
 	/**
 	 * Send SMTP data
 	 *
-	 * @access	protected
 	 * @return	bool
 	 */
 	protected function _send_data($data)
@@ -1829,7 +1776,6 @@ class CI_Email {
 	/**
 	 * Get SMTP data
 	 *
-	 * @access	protected
 	 * @return	string
 	 */
 	protected function _get_smtp_data()
@@ -1854,7 +1800,6 @@ class CI_Email {
 	/**
 	 * Get Hostname
 	 *
-	 * @access	protected
 	 * @return	string
 	 */
 	protected function _get_hostname()
@@ -1867,7 +1812,6 @@ class CI_Email {
 	/**
 	 * Get IP
 	 *
-	 * @access	protected
 	 * @return	string
 	 */
 	protected function _get_ip()
@@ -1881,10 +1825,22 @@ class CI_Email {
 		$rip = (isset($_SERVER['REMOTE_ADDR']) AND $_SERVER['REMOTE_ADDR'] != "") ? $_SERVER['REMOTE_ADDR'] : FALSE;
 		$fip = (isset($_SERVER['HTTP_X_FORWARDED_FOR']) AND $_SERVER['HTTP_X_FORWARDED_FOR'] != "") ? $_SERVER['HTTP_X_FORWARDED_FOR'] : FALSE;
 
-		if ($cip && $rip)	$this->_IP = $cip;
-		elseif ($rip)		$this->_IP = $rip;
-		elseif ($cip)		$this->_IP = $cip;
-		elseif ($fip)		$this->_IP = $fip;
+		if ($cip && $rip)
+		{
+			$this->_IP = $cip;
+		}
+		elseif ($rip)
+		{
+			$this->_IP = $rip;
+		}
+		elseif ($cip)
+		{
+			$this->_IP = $cip;
+		}
+		elseif ($fip)
+		{
+			$this->_IP = $fip;
+		}
 
 		if (strpos($this->_IP, ',') !== FALSE)
 		{
@@ -1909,7 +1865,6 @@ class CI_Email {
 	/**
 	 * Get Debug Message
 	 *
-	 * @access	public
 	 * @return	string
 	 */
 	public function print_debugger()
@@ -1933,7 +1888,6 @@ class CI_Email {
 	/**
 	 * Set Message
 	 *
-	 * @access	protected
 	 * @param	string
 	 * @return	string
 	 */
@@ -1963,98 +1917,98 @@ class CI_Email {
 	 */
 	protected function _mime_types($ext = "")
 	{
-		$mimes = array(	'hqx'	=>	'application/mac-binhex40',
-						'cpt'	=>	'application/mac-compactpro',
-						'doc'	=>	'application/msword',
-						'bin'	=>	'application/macbinary',
-						'dms'	=>	'application/octet-stream',
-						'lha'	=>	'application/octet-stream',
-						'lzh'	=>	'application/octet-stream',
-						'exe'	=>	'application/octet-stream',
-						'class'	=>	'application/octet-stream',
-						'psd'	=>	'application/octet-stream',
-						'so'	=>	'application/octet-stream',
-						'sea'	=>	'application/octet-stream',
-						'dll'	=>	'application/octet-stream',
-						'oda'	=>	'application/oda',
-						'pdf'	=>	'application/pdf',
-						'ai'	=>	'application/postscript',
-						'eps'	=>	'application/postscript',
-						'ps'	=>	'application/postscript',
-						'smi'	=>	'application/smil',
-						'smil'	=>	'application/smil',
-						'mif'	=>	'application/vnd.mif',
-						'xls'	=>	'application/vnd.ms-excel',
-						'ppt'	=>	'application/vnd.ms-powerpoint',
-						'wbxml'	=>	'application/vnd.wap.wbxml',
-						'wmlc'	=>	'application/vnd.wap.wmlc',
-						'dcr'	=>	'application/x-director',
-						'dir'	=>	'application/x-director',
-						'dxr'	=>	'application/x-director',
-						'dvi'	=>	'application/x-dvi',
-						'gtar'	=>	'application/x-gtar',
-						'php'	=>	'application/x-httpd-php',
-						'php4'	=>	'application/x-httpd-php',
-						'php3'	=>	'application/x-httpd-php',
-						'phtml'	=>	'application/x-httpd-php',
-						'phps'	=>	'application/x-httpd-php-source',
-						'js'	=>	'application/x-javascript',
-						'swf'	=>	'application/x-shockwave-flash',
-						'sit'	=>	'application/x-stuffit',
-						'tar'	=>	'application/x-tar',
-						'tgz'	=>	'application/x-tar',
-						'xhtml'	=>	'application/xhtml+xml',
-						'xht'	=>	'application/xhtml+xml',
-						'zip'	=>	'application/zip',
-						'mid'	=>	'audio/midi',
-						'midi'	=>	'audio/midi',
-						'mpga'	=>	'audio/mpeg',
-						'mp2'	=>	'audio/mpeg',
-						'mp3'	=>	'audio/mpeg',
-						'aif'	=>	'audio/x-aiff',
-						'aiff'	=>	'audio/x-aiff',
-						'aifc'	=>	'audio/x-aiff',
-						'ram'	=>	'audio/x-pn-realaudio',
-						'rm'	=>	'audio/x-pn-realaudio',
-						'rpm'	=>	'audio/x-pn-realaudio-plugin',
-						'ra'	=>	'audio/x-realaudio',
-						'rv'	=>	'video/vnd.rn-realvideo',
-						'wav'	=>	'audio/x-wav',
-						'bmp'	=>	'image/bmp',
-						'gif'	=>	'image/gif',
-						'jpeg'	=>	'image/jpeg',
-						'jpg'	=>	'image/jpeg',
-						'jpe'	=>	'image/jpeg',
-						'png'	=>	'image/png',
-						'tiff'	=>	'image/tiff',
-						'tif'	=>	'image/tiff',
-						'css'	=>	'text/css',
-						'html'	=>	'text/html',
-						'htm'	=>	'text/html',
-						'shtml'	=>	'text/html',
-						'txt'	=>	'text/plain',
-						'text'	=>	'text/plain',
-						'log'	=>	'text/plain',
-						'rtx'	=>	'text/richtext',
-						'rtf'	=>	'text/rtf',
-						'xml'	=>	'text/xml',
-						'xsl'	=>	'text/xml',
-						'mpeg'	=>	'video/mpeg',
-						'mpg'	=>	'video/mpeg',
-						'mpe'	=>	'video/mpeg',
-						'qt'	=>	'video/quicktime',
-						'mov'	=>	'video/quicktime',
-						'avi'	=>	'video/x-msvideo',
-						'movie'	=>	'video/x-sgi-movie',
-						'doc'	=>	'application/msword',
-						'word'	=>	'application/msword',
-						'xl'	=>	'application/excel',
-						'eml'	=>	'message/rfc822'
-					);
+		$mimes = array(
+			'hqx'	=>	'application/mac-binhex40',
+			'cpt'	=>	'application/mac-compactpro',
+			'doc'	=>	'application/msword',
+			'bin'	=>	'application/macbinary',
+			'dms'	=>	'application/octet-stream',
+			'lha'	=>	'application/octet-stream',
+			'lzh'	=>	'application/octet-stream',
+			'exe'	=>	'application/octet-stream',
+			'class'	=>	'application/octet-stream',
+			'psd'	=>	'application/octet-stream',
+			'so'	=>	'application/octet-stream',
+			'sea'	=>	'application/octet-stream',
+			'dll'	=>	'application/octet-stream',
+			'oda'	=>	'application/oda',
+			'pdf'	=>	'application/pdf',
+			'ai'	=>	'application/postscript',
+			'eps'	=>	'application/postscript',
+			'ps'	=>	'application/postscript',
+			'smi'	=>	'application/smil',
+			'smil'	=>	'application/smil',
+			'mif'	=>	'application/vnd.mif',
+			'xls'	=>	'application/vnd.ms-excel',
+			'ppt'	=>	'application/vnd.ms-powerpoint',
+			'wbxml'	=>	'application/vnd.wap.wbxml',
+			'wmlc'	=>	'application/vnd.wap.wmlc',
+			'dcr'	=>	'application/x-director',
+			'dir'	=>	'application/x-director',
+			'dxr'	=>	'application/x-director',
+			'dvi'	=>	'application/x-dvi',
+			'gtar'	=>	'application/x-gtar',
+			'php'	=>	'application/x-httpd-php',
+			'php4'	=>	'application/x-httpd-php',
+			'php3'	=>	'application/x-httpd-php',
+			'phtml'	=>	'application/x-httpd-php',
+			'phps'	=>	'application/x-httpd-php-source',
+			'js'	=>	'application/x-javascript',
+			'swf'	=>	'application/x-shockwave-flash',
+			'sit'	=>	'application/x-stuffit',
+			'tar'	=>	'application/x-tar',
+			'tgz'	=>	'application/x-tar',
+			'xhtml'	=>	'application/xhtml+xml',
+			'xht'	=>	'application/xhtml+xml',
+			'zip'	=>	'application/zip',
+			'mid'	=>	'audio/midi',
+			'midi'	=>	'audio/midi',
+			'mpga'	=>	'audio/mpeg',
+			'mp2'	=>	'audio/mpeg',
+			'mp3'	=>	'audio/mpeg',
+			'aif'	=>	'audio/x-aiff',
+			'aiff'	=>	'audio/x-aiff',
+			'aifc'	=>	'audio/x-aiff',
+			'ram'	=>	'audio/x-pn-realaudio',
+			'rm'	=>	'audio/x-pn-realaudio',
+			'rpm'	=>	'audio/x-pn-realaudio-plugin',
+			'ra'	=>	'audio/x-realaudio',
+			'rv'	=>	'video/vnd.rn-realvideo',
+			'wav'	=>	'audio/x-wav',
+			'bmp'	=>	'image/bmp',
+			'gif'	=>	'image/gif',
+			'jpeg'	=>	'image/jpeg',
+			'jpg'	=>	'image/jpeg',
+			'jpe'	=>	'image/jpeg',
+			'png'	=>	'image/png',
+			'tiff'	=>	'image/tiff',
+			'tif'	=>	'image/tiff',
+			'css'	=>	'text/css',
+			'html'	=>	'text/html',
+			'htm'	=>	'text/html',
+			'shtml'	=>	'text/html',
+			'txt'	=>	'text/plain',
+			'text'	=>	'text/plain',
+			'log'	=>	'text/plain',
+			'rtx'	=>	'text/richtext',
+			'rtf'	=>	'text/rtf',
+			'xml'	=>	'text/xml',
+			'xsl'	=>	'text/xml',
+			'mpeg'	=>	'video/mpeg',
+			'mpg'	=>	'video/mpeg',
+			'mpe'	=>	'video/mpeg',
+			'qt'	=>	'video/quicktime',
+			'mov'	=>	'video/quicktime',
+			'avi'	=>	'video/x-msvideo',
+			'movie'	=>	'video/x-sgi-movie',
+			'doc'	=>	'application/msword',
+			'word'	=>	'application/msword',
+			'xl'	=>	'application/excel',
+			'eml'	=>	'message/rfc822'
+		);
 
 		return ( ! isset($mimes[strtolower($ext)])) ? "application/x-unknown-content-type" : $mimes[strtolower($ext)];
 	}
-
 }
 // END CI_Email class
 

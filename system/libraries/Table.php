@@ -28,14 +28,14 @@
  */
 class CI_Table {
 
-	var $rows				= array();
-	var $heading			= array();
-	var $auto_heading		= TRUE;
-	var $caption			= NULL;
-	var $template			= NULL;
-	var $newline			= "\n";
-	var $empty_cells		= "";
-	var	$function			= FALSE;
+	public $rows				= array();
+	public $heading			= array();
+	public $auto_heading		= TRUE;
+	public $caption			= NULL;
+	public $template			= NULL;
+	public $newline			= "\n";
+	public $empty_cells		= "";
+	public	$function			= FALSE;
 
 	public function __construct()
 	{
@@ -47,11 +47,10 @@ class CI_Table {
 	/**
 	 * Set the template
 	 *
-	 * @access	public
 	 * @param	array
 	 * @return	void
 	 */
-	function set_template($template)
+	public function set_template($template)
 	{
 		if ( ! is_array($template))
 		{
@@ -59,6 +58,8 @@ class CI_Table {
 		}
 
 		$this->template = $template;
+		
+		return $this;
 	}
 
 	// --------------------------------------------------------------------
@@ -68,14 +69,14 @@ class CI_Table {
 	 *
 	 * Can be passed as an array or discreet params
 	 *
-	 * @access	public
 	 * @param	mixed
 	 * @return	void
 	 */
-	function set_heading()
+	public function set_heading()
 	{
 		$args = func_get_args();
 		$this->heading = $this->_prep_args($args);
+		return $this;
 	}
 
 	// --------------------------------------------------------------------
@@ -86,12 +87,11 @@ class CI_Table {
 	 * columns.  This allows a single array with many elements to  be
 	 * displayed in a table that has a fixed column count.
 	 *
-	 * @access	public
 	 * @param	array
 	 * @param	int
 	 * @return	void
 	 */
-	function make_columns($array = array(), $col_limit = 0)
+	public function make_columns($array = array(), $col_limit = 0)
 	{
 		if ( ! is_array($array) OR count($array) == 0)
 		{
@@ -133,13 +133,13 @@ class CI_Table {
 	 *
 	 * Can be passed as an array or discreet params
 	 *
-	 * @access	public
 	 * @param	mixed
 	 * @return	void
 	 */
-	function set_empty($value)
+	public function set_empty($value)
 	{
 		$this->empty_cells = $value;
+		return $this;
 	}
 
 	// --------------------------------------------------------------------
@@ -149,14 +149,14 @@ class CI_Table {
 	 *
 	 * Can be passed as an array or discreet params
 	 *
-	 * @access	public
 	 * @param	mixed
 	 * @return	void
 	 */
-	function add_row()
+	public function add_row()
 	{
 		$args = func_get_args();
 		$this->rows[] = $this->_prep_args($args);
+		return $this;
 	}
 
 	// --------------------------------------------------------------------
@@ -166,15 +166,14 @@ class CI_Table {
 	 *
 	 * Ensures a standard associative array format for all cell data
 	 *
-	 * @access	public
 	 * @param	type
 	 * @return	type
 	 */
-	function _prep_args($args)
+	protected function _prep_args($args)
 	{
 		// If there is no $args[0], skip this and treat as an associative array
-		// This can happen if there is only a single key, for example this is passed to table->generate
-		// array(array('foo'=>'bar'))
+		// This can happen if there is only a single key, for example this 
+		// is passed to table->generate array(array('foo'=>'bar'))
 		if (isset($args[0]) AND (count($args) == 1 && is_array($args[0])))
 		{
 			// args sent as indexed array
@@ -212,13 +211,13 @@ class CI_Table {
 	/**
 	 * Add a table caption
 	 *
-	 * @access	public
 	 * @param	string
 	 * @return	void
 	 */
-	function set_caption($caption)
+	public function set_caption($caption)
 	{
 		$this->caption = $caption;
+		return $this;
 	}
 
 	// --------------------------------------------------------------------
@@ -226,11 +225,10 @@ class CI_Table {
 	/**
 	 * Generate the table
 	 *
-	 * @access	public
 	 * @param	mixed
 	 * @return	string
 	 */
-	function generate($table_data = NULL)
+	public function generate($table_data = NULL)
 	{
 		// The table data can optionally be passed to this function
 		// either as a database result object or an array
@@ -377,15 +375,13 @@ class CI_Table {
 
 	/**
 	 * Clears the table arrays.  Useful if multiple tables are being generated
-	 *
-	 * @access	public
-	 * @return	void
 	 */
-	function clear()
+	public function clear()
 	{
 		$this->rows				= array();
 		$this->heading			= array();
 		$this->auto_heading		= TRUE;
+		return $this;
 	}
 
 	// --------------------------------------------------------------------
@@ -393,11 +389,10 @@ class CI_Table {
 	/**
 	 * Set table data from a database result object
 	 *
-	 * @access	public
 	 * @param	object
 	 * @return	void
 	 */
-	function _set_from_object($query)
+	protected function _set_from_object($query)
 	{
 		if ( ! is_object($query))
 		{
@@ -431,11 +426,10 @@ class CI_Table {
 	/**
 	 * Set table data from an array
 	 *
-	 * @access	public
 	 * @param	array
 	 * @return	void
 	 */
-	function _set_from_array($data, $set_heading = TRUE)
+	protected function _set_from_array($data, $set_heading = TRUE)
 	{
 		if ( ! is_array($data) OR count($data) == 0)
 		{
@@ -464,10 +458,9 @@ class CI_Table {
 	/**
 	 * Compile Template
 	 *
-	 * @access	private
 	 * @return	void
 	 */
-	function _compile_template()
+	protected function _compile_template()
 	{
 		if ($this->template == NULL)
 		{
@@ -490,42 +483,38 @@ class CI_Table {
 	/**
 	 * Default Template
 	 *
-	 * @access	private
 	 * @return	void
 	 */
-	function _default_template()
+	protected function _default_template()
 	{
 		return  array (
-						'table_open'			=> '<table border="0" cellpadding="4" cellspacing="0">',
+			'table_open'			=> '<table border="0" cellpadding="4" cellspacing="0">',
 
-						'thead_open'			=> '<thead>',
-						'thead_close'			=> '</thead>',
+			'thead_open'			=> '<thead>',
+			'thead_close'			=> '</thead>',
 
-						'heading_row_start'		=> '<tr>',
-						'heading_row_end'		=> '</tr>',
-						'heading_cell_start'	=> '<th>',
-						'heading_cell_end'		=> '</th>',
+			'heading_row_start'		=> '<tr>',
+			'heading_row_end'		=> '</tr>',
+			'heading_cell_start'	=> '<th>',
+			'heading_cell_end'		=> '</th>',
 
-						'tbody_open'			=> '<tbody>',
-						'tbody_close'			=> '</tbody>',
+			'tbody_open'			=> '<tbody>',
+			'tbody_close'			=> '</tbody>',
 
-						'row_start'				=> '<tr>',
-						'row_end'				=> '</tr>',
-						'cell_start'			=> '<td>',
-						'cell_end'				=> '</td>',
+			'row_start'				=> '<tr>',
+			'row_end'				=> '</tr>',
+			'cell_start'			=> '<td>',
+			'cell_end'				=> '</td>',
 
-						'row_alt_start'		=> '<tr>',
-						'row_alt_end'			=> '</tr>',
-						'cell_alt_start'		=> '<td>',
-						'cell_alt_end'			=> '</td>',
+			'row_alt_start'			=> '<tr>',
+			'row_alt_end'			=> '</tr>',
+			'cell_alt_start'		=> '<td>',
+			'cell_alt_end'			=> '</td>',
 
-						'table_close'			=> '</table>'
-					);
+			'table_close'			=> '</table>'
+		);
 	}
-
-
 }
-
 
 /* End of file Table.php */
 /* Location: ./system/libraries/Table.php */

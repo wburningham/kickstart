@@ -28,17 +28,21 @@
  */
 class CI_Trackback {
 
-	var $time_format	= 'local';
-	var $charset		= 'UTF-8';
-	var $data			= array('url' => '', 'title' => '', 'excerpt' => '', 'blog_name' => '', 'charset' => '');
-	var $convert_ascii	= TRUE;
-	var $response		= '';
-	var $error_msg		= array();
+	public $time_format		= 'local';
+	public $charset			= 'UTF-8';
+	public $data			= array(
+		'url' 		=> '', 
+		'title' 	=> '', 
+		'excerpt' 	=> '', 
+		'blog_name' => '', 
+		'charset' 	=> ''
+	);
+	public $convert_ascii	= TRUE;
+	public $response		= '';
+	public $error_msg		= array();
 
 	/**
 	 * Constructor
-	 *
-	 * @access	public
 	 */
 	public function __construct()
 	{
@@ -50,11 +54,10 @@ class CI_Trackback {
 	/**
 	 * Send Trackback
 	 *
-	 * @access	public
 	 * @param	array
 	 * @return	bool
 	 */
-	function send($tb_data)
+	public function send($tb_data)
 	{
 		if ( ! is_array($tb_data))
 		{
@@ -132,10 +135,9 @@ class CI_Trackback {
 	 * If the data is valid it is set to the $this->data array
 	 * so that it can be inserted into a database.
 	 *
-	 * @access	public
 	 * @return	bool
 	 */
-	function receive()
+	public function receive()
 	{
 		foreach (array('url', 'title', 'blog_name', 'excerpt') as $val)
 		{
@@ -174,11 +176,10 @@ class CI_Trackback {
 	 * sends the "incomplete information" error, as that's
 	 * the most common one.
 	 *
-	 * @access	public
 	 * @param	string
 	 * @return	void
 	 */
-	function send_error($message = 'Incomplete Information')
+	public function send_error($message = 'Incomplete Information')
 	{
 		echo "<?xml version=\"1.0\" encoding=\"utf-8\"?".">\n<response>\n<error>1</error>\n<message>".$message."</message>\n</response>";
 		exit;
@@ -192,10 +193,9 @@ class CI_Trackback {
 	 * This should be called when a trackback has been
 	 * successfully received and inserted.
 	 *
-	 * @access	public
 	 * @return	void
 	 */
-	function send_success()
+	public function send_success()
 	{
 		echo "<?xml version=\"1.0\" encoding=\"utf-8\"?".">\n<response>\n<error>0</error>\n</response>";
 		exit;
@@ -206,11 +206,10 @@ class CI_Trackback {
 	/**
 	 * Fetch a particular item
 	 *
-	 * @access	public
 	 * @param	string
 	 * @return	string
 	 */
-	function data($item)
+	public function data($item)
 	{
 		return ( ! isset($this->data[$item])) ? '' : $this->data[$item];
 	}
@@ -223,12 +222,11 @@ class CI_Trackback {
 	 * Opens a socket connection and passes the data to
 	 * the server.  Returns TRUE on success, FALSE on failure
 	 *
-	 * @access	public
 	 * @param	string
 	 * @param	string
 	 * @return	bool
 	 */
-	function process($url, $data)
+	public function process($url, $data)
 	{
 		$target = parse_url($url);
 
@@ -251,12 +249,12 @@ class CI_Trackback {
 		}
 
 		// Transfer the data
-		fputs ($fp, "POST " . $path . " HTTP/1.0\r\n" );
-		fputs ($fp, "Host: " . $target['host'] . "\r\n" );
-		fputs ($fp, "Content-type: application/x-www-form-urlencoded\r\n" );
-		fputs ($fp, "Content-length: " . strlen($data) . "\r\n" );
-		fputs ($fp, "Connection: close\r\n\r\n" );
-		fputs ($fp, $data);
+		fputs($fp, "POST " . $path . " HTTP/1.0\r\n" );
+		fputs($fp, "Host: " . $target['host'] . "\r\n" );
+		fputs($fp, "Content-type: application/x-www-form-urlencoded\r\n" );
+		fputs($fp, "Content-length: " . strlen($data) . "\r\n" );
+		fputs($fp, "Connection: close\r\n\r\n" );
+		fputs($fp, $data);
 
 		// Was it successful?
 		$this->response = "";
@@ -293,11 +291,10 @@ class CI_Trackback {
 	 * It takes a string of URLs (separated by comma or
 	 * space) and puts each URL into an array
 	 *
-	 * @access	public
 	 * @param	string
 	 * @return	string
 	 */
-	function extract_urls($urls)
+	public function extract_urls($urls)
 	{
 		// Remove the pesky white space and replace with a comma.
 		$urls = preg_replace("/\s*(\S+)\s*/", "\\1,", $urls);
@@ -329,11 +326,10 @@ class CI_Trackback {
 	 *
 	 * Simply adds "http://" if missing
 	 *
-	 * @access	public
 	 * @param	string
 	 * @return	string
 	 */
-	function validate_url($url)
+	public function validate_url($url)
 	{
 		$url = trim($url);
 
@@ -348,11 +344,10 @@ class CI_Trackback {
 	/**
 	 * Find the Trackback URL's ID
 	 *
-	 * @access	public
 	 * @param	string
 	 * @return	string
 	 */
-	function get_id($url)
+	public function get_id($url)
 	{
 		$tb_id = "";
 
@@ -382,14 +377,7 @@ class CI_Trackback {
 			}
 		}
 
-		if ( ! preg_match ("/^([0-9]+)$/", $tb_id))
-		{
-			return FALSE;
-		}
-		else
-		{
-			return $tb_id;
-		}
+		return (preg_match("/^([0-9]+)$/", $tb_id)) ? TRUE : FALSE;
 	}
 
 	// --------------------------------------------------------------------
@@ -397,11 +385,10 @@ class CI_Trackback {
 	/**
 	 * Convert Reserved XML characters to Entities
 	 *
-	 * @access	public
 	 * @param	string
 	 * @return	string
 	 */
-	function convert_xml($str)
+	public function convert_xml($str)
 	{
 		$temp = '__TEMP_AMPERSANDS__';
 
@@ -425,13 +412,12 @@ class CI_Trackback {
 	 *
 	 * Limits the string based on the character count. Will preserve complete words.
 	 *
-	 * @access	public
 	 * @param	string
 	 * @param	integer
 	 * @param	string
 	 * @return	string
 	 */
-	function limit_characters($str, $n = 500, $end_char = '&#8230;')
+	public function limit_characters($str, $n = 500, $end_char = '&#8230;')
 	{
 		if (strlen($str) < $n)
 		{
@@ -464,11 +450,10 @@ class CI_Trackback {
 	 * Converts Hight ascii text and MS Word special chars
 	 * to character entities
 	 *
-	 * @access	public
 	 * @param	string
 	 * @return	string
 	 */
-	function convert_ascii($str)
+	public function convert_ascii($str)
 	{
 		$count	= 1;
 		$out	= '';
@@ -510,11 +495,10 @@ class CI_Trackback {
 	/**
 	 * Set error message
 	 *
-	 * @access	public
 	 * @param	string
 	 * @return	void
 	 */
-	function set_error($msg)
+	public function set_error($msg)
 	{
 		log_message('error', $msg);
 		$this->error_msg[] = $msg;
@@ -525,12 +509,11 @@ class CI_Trackback {
 	/**
 	 * Show error messages
 	 *
-	 * @access	public
 	 * @param	string
 	 * @param	string
 	 * @return	string
 	 */
-	function display_errors($open = '<p>', $close = '</p>')
+	public function display_errors($open = '<p>', $close = '</p>')
 	{
 		$str = '';
 		foreach ($this->error_msg as $val)
@@ -540,7 +523,6 @@ class CI_Trackback {
 
 		return $str;
 	}
-
 }
 // END Trackback Class
 

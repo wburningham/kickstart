@@ -26,7 +26,7 @@
  */
 class CI_Javascript {
 
-	var $_javascript_location = 'js';
+	public $_javascript_location = 'js';
 
 	public function __construct($params = array())
 	{
