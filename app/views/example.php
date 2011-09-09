@@ -20,14 +20,14 @@
     <!-- Le javascript -->
     <script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
     <script src="http://autobahn.tablesorter.com/jquery.tablesorter.min.js"></script>
-    <script src="assets/js/google-code-prettify/prettify.js"></script>
-    <script src="assets/js/application.js"></script>
+    <script src="../../assets/js/prettify.js"></script>
+    <script src="../../assets/js/application.js"></script>
 
     <!-- Le fav and touch icons -->
-    <link rel="shortcut icon" href="images/favicon.ico">
-    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    <link rel="shortcut icon" href="../../assets/img/favicon.ico">
+    <link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="../../assets/img/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="../../assets/img/apple-touch-icon-114x114.png">
   </head>
 
   <body>
@@ -119,7 +119,6 @@
     <div class="span5 columns">
       <h3>Browser support</h3>
       <p>Bootstrap is tested and supported in major modern browsers like Chrome, Safari, Internet Explorer, and Firefox.</p>
-      <img src="assets/img/browsers.png" width="258px" height="48px" alt="Tested and supported in Chrome, Safari, Internet Explorer, and Firefox">
       <ul>
         <li>Latest Safari</li>
         <li>Latest Google Chrome</li>
@@ -1238,7 +1237,6 @@ Lorem ipsum dolar sit amet illo error <a href="#" title="below">ipsum</a> verita
               </div>
             </div>
           </div>
-          <img class="large-bird" src="assets/img/bird.png" width="220px" height="145px">
         </div>
       </div>
     </div>
