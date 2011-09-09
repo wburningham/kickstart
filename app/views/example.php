@@ -127,12 +127,13 @@
     </div>
     <div class="span5 columns">
       <h3>What's included</h3>
-      <p>Bootstrap comes complete with compiled CSS, uncompiled, and example templates.</p>
+      <p>Kickstart is made up of the following:</p>
       <ul>
-        <li>All original .less files</li>
-        <li>Fully compiled and minified CSS</li>
-        <li>Complete styleguide documentation</li>
-        <li>Example page template (more to come soon)</li>
+        <li>CodeIgniter 2.0.3 Core</li>
+        <li>Bootstrap CSS</li>
+        <li>Normalize.css</li>
+        <li>LESS.js</li>
+        <li>jQuery</li>
       </ul>
     </div>
   </div><!-- /row -->
