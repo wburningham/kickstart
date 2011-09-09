@@ -83,7 +83,7 @@ class MY_Profiler extends CI_Profiler
 		if (count($data) == 0) {
 			return '';
 		}
-			
+
 		$output  = "\n\n";
 		$output .= '<fieldset style="border:1px solid '.$color.';padding:6px 10px 10px 10px;margin:20px 0 20px 0;background-color:#eee">';
 		$output .= "\n";
@@ -240,7 +240,7 @@ class MY_Profiler extends CI_Profiler
 	}
 	
 	// --------------------------------------------------------------------
-			
+	
 	/**
 	 * Run the Profiler
 	 *
@@ -250,7 +250,54 @@ class MY_Profiler extends CI_Profiler
 	function run()
 	{			
 		$output = "<div id='codeigniter_profiler' style='clear:both;background-color:#fff;padding:10px;'>";
-		
+		$output .= <<<STYLES
+<style>
+	
+	#codeigniter_profiler #ci_profiler_uri_string,
+	#codeigniter_profiler #ci_profiler_controller_info {
+		width: 50% !important;
+		float: left !important;	
+	}
+	
+	#codeigniter_profiler {
+		background-color:#fff !important;
+		/* margin:40px !important; */
+		font:13px/20px normal Helvetica,Arial,sans-serif !important;
+		color:#4F5155 !important
+	}
+
+	#codeigniter_profiler legend {
+		color:#444 !important;background-color:transparent !important;
+		font-size:14px !important;
+		font-weight:normal !important;
+	}
+
+	code {
+		font-family:Consolas,Monaco,Courier New,Courier,monospace !important;
+		font-size:12px !important;
+		background-color:#f9f9f9 !important;
+		border:1px solid#D0D0D0 !important;
+		color:#002166 !important;
+		display:block !important;
+		margin:14px 0 !important;
+		padding:12px 10px !important
+	}
+
+	#codeigniter_profiler fieldset {
+		/* border: none !important; */
+		margin:10px !important;
+		border:1px solid#D0D0D0 !important;
+		-webkit-box-shadow:0 0 8px#D0D0D0 !important;
+		background-color: #FFFFFF !important;
+	}
+
+	#codeigniter_profiler fieldset td {
+		background-color: #eee !important;
+	}
+
+</style>
+STYLES;
+			
 		if ($this->CI->config->item('show_uri_string')) { 		$output .= $this->_compile_uri_string(); }
 		if ($this->CI->config->item('show_controller_info')) { 	$output .= $this->_compile_controller_info(); }
 		if ($this->CI->config->item('show_memory_usage')) { 	$output .= $this->_compile_memory_usage(); }

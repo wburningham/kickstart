@@ -44,7 +44,7 @@
 		padding: 12px 10px 12px 10px;
 	}
 
-	#body{
+	.body{
 		margin: 0 15px 0 15px;
 	}
 	
@@ -57,7 +57,7 @@
 		margin: 20px 0 0 0;
 	}
 	
-	#container{
+	.container{
 		margin: 10px;
 		border: 1px solid #D0D0D0;
 		-webkit-box-shadow: 0 0 8px #D0D0D0;
@@ -66,10 +66,10 @@
 </head>
 <body>
 
-<div id="container">
+<div class="container">
 	<h1>Welcome to CodeIgniter!</h1>
 
-	<div id="body">
+	<div class="body">
 		<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
 
 		<p>If you would like to edit this page you'll find it located at:</p>

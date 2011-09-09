@@ -19,6 +19,8 @@ class Main extends MY_Controller {
 	 */
 	public function index()
 	{
+		$_GET['test'] = 'get';
+		$_POST['test'] = 'post';
 		$this->load->view('main');
 	}
 

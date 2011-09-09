@@ -21,7 +21,7 @@ class MY_Loader extends CI_Loader {
 		$this->CI =& get_instance();
 
 		// Enable profiler if in dev environment
-		$enable_profiler = ENVIRONMENT == 'development' ? TRUE : FALSE
+		$enable_profiler = ENVIRONMENT == 'development' ? TRUE : FALSE;
 		$this->CI->output->enable_profiler($enable_profiler);
 
 		// if it is done by ajax, set content type to json
