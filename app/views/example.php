@@ -37,7 +37,7 @@
     <div class="topbar">
       <div class="topbar-inner">
         <div class="container">
-          <h3><a href="#">Bootstrap</a></h3>
+          <h3><a href="#">kickstart</a></h3>
           <ul class="nav">
             <li class="active"><a href="#masthead">Overview</a></li>
             <li><a href="#about">About</a></li>
@@ -60,10 +60,10 @@
     <div id="masthead">
       <div class="inner">
         <div class="container">
-          <h1>Bootstrap, from Twitter</h1>
+          <h1>kickstart Framework</h1>
           <p class="lead">
-            Bootstrap is a toolkit from Twitter designed to kickstart development of webapps and sites.<br />
-            It includes base CSS and HTML for typography, forms, buttons, tables, grids, navigation, and more.<br />
+            Kickstart is an adaptation of CodeIgniter with Bootstrap CSS<br />
+            In addition to extended CI core functionality, it includes base CSS and HTML for typography, forms, buttons, tables, grids, navigation, and more.<br />
           </p>
           <p><strong>Nerd alert:</strong> Bootstrap is <a href="#less" title="Read about using Bootstrap with Less">built with Less</a> and was designed to work out of the gate with modern browsers in mind.</p>
         </div><!-- /container -->
@@ -92,8 +92,8 @@
           </div>
           <div class="span5 columns">
             <h6>Fork on GitHub</h6>
-            <p>Download, fork, pull, file issues, and more with the official Bootstrap repo on Github.</p>
-            <p><a target="_blank" href="https://github.com/twitter/bootstrap" class="btn primary">Bootstrap on GitHub &raquo;</a></p>
+            <p>Download, fork, pull, file issues, and more with my kickstart repo on Github.</p>
+            <p><a target="_blank" href="https://github.com/wburningham/kickstart" class="btn primary">kickstart on GitHub &raquo;</a></p>
           </div>
         </div><!-- /row -->
       </div>
@@ -107,14 +107,12 @@
 ================================================== -->
 <section id="about">
   <div class="page-header">
-    <h1>About Bootstrap <small>Brief history, browser support, and more</small></h1>
+    <h1>About kickstart <small>Background, browser support, and more</small></h1>
   </div>
   <div class="row">
     <div class="span6 columns">
-      <h3>History</h3>
-      <p>In the earlier days of Twitter, engineers used almost any library they were familiar with to meet front-end requirements. Bootstrap began as an answer to the challenges that presented and development quickly accelerated during Twitter’s first Hackweek.</p>
-      <p>With the help and feedback of many engineers at Twitter, Bootstrap has grown significantly to encompass not only basic styles, but more elegant and durable front-end design patterns.</p>
-      <p>Read more on <a href="https://dev.twitter.com/blog/bootstrap-twitter">dev.twitter.com &rsaquo;</a></p>
+      <h3>Background</h3>
+      <p>After working sereral years as a web developer, I wanted a simple, yet robust framework to kickstart my prototyping.</p>
     </div>
     <div class="span5 columns">
       <h3>Browser support</h3>
@@ -1400,7 +1398,7 @@ Lorem ipsum dolar sit amet illo error <a href="#" title="below">ipsum</a> verita
         <div class="container">
           <p class="right"><a href="#">Back to top</a></p>
           <p>
-            Designed and built with all the love in the world <a href="http://twitter.com/twitter" target="_blank">@twitter</a> by <a href="http://twitter.com/mdo" target="_blank">@mdo</a> and <a href="http://twitter.com/fat" target="_blank">@fat</a>.<br />
+            Compiled and modified by <a href="http://twitter.com/twitter" target="_blank">wburningham</a> from <a href="http:/codeigniter.com" target="_blank">CodeIgniter</a>, <a href="http://twitter.github.com/bootstrap/" target="_blank">Bootstrap</a>, <a href="http://lesscss.org/" target="_blank">LESS.js</a>.<br />
             Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a>.
           </p>
         </div>
