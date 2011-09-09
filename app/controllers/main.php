@@ -19,8 +19,21 @@ class Main extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		$this->load->view('main');
 	}
+
+	/**
+	 *	 Example page
+	 *
+	 *  @since 09-Sep-2011
+	 *  @author  Jarrett Burningham
+	 *	 @access public
+	*/
+	public function example()
+	{
+		$this->load->view('example');
+	}
+	
 }
 
 /* End of file main.php */
