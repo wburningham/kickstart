@@ -272,17 +272,6 @@ class MY_Profiler extends CI_Profiler
 		font-weight:normal !important;
 	}
 
-	code {
-		font-family:Consolas,Monaco,Courier New,Courier,monospace !important;
-		font-size:12px !important;
-		background-color:#f9f9f9 !important;
-		border:1px solid#D0D0D0 !important;
-		color:#002166 !important;
-		display:block !important;
-		margin:14px 0 !important;
-		padding:12px 10px !important
-	}
-
 	#codeigniter_profiler fieldset {
 		/* border: none !important; */
 		margin:10px !important;
