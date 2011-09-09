@@ -7,7 +7,7 @@ class MY_Controller extends CI_Controller {
 		parent::__construct();
 
 		// Enable MY_Profiler when in development mode
-		if(ENVIRONMENT == 'development' )
+		if(ENVIRONMENT == 'development')
 		{
 			$this->config->load('profiler', FALSE, TRUE);
 

@@ -20,16 +20,14 @@ class MY_Loader extends CI_Loader {
 	{
 		$this->CI =& get_instance();
 
+		// Enable profiler if in dev environment
+		$enable_profiler = ENVIRONMENT == 'development' ? TRUE : FALSE
+		$this->CI->output->enable_profiler($enable_profiler);
+
 		// if it is done by ajax, set content type to json
 		if ($this->CI->input->is_ajax_request()) 
 		{
-			$this->CI->output->enable_profiler(FALSE);
 			$this->CI->output->set_content_type('application/json');
-		}
-		else 
-		{
-			$this->CI->output->enable_profiler(TRUE);
-			$this->CI->output->set_content_type('text/html');
 		}
 
 		// Send the JSON
@@ -38,8 +36,7 @@ class MY_Loader extends CI_Loader {
 	
 	/**
 	 *	 Fuction that returns the cached variables
-	 *	 This is necessary for the MY_Profiler to have access to the cached 
-	 *	 variables
+	 *	 This is necessary for the MY_Profiler to have access to the cached variables
 	 *
 	 *  @since 09-Sep-2011
 	 *  @author  Jarrett Burningham
