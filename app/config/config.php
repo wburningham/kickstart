@@ -30,6 +30,21 @@ $config['index_page'] = 'index.php';
 
 /*
 |--------------------------------------------------------------------------
+| Static URL
+|--------------------------------------------------------------------------
+|
+| URL to your static content (ie, images, js, css, less, etc)
+| WITH a trailing slash:
+|
+|	http://example.com/
+|
+| If this is not set then the base_url will be used
+|
+*/
+$config['static_url']	= '';
+
+/*
+|--------------------------------------------------------------------------
 | URI PROTOCOL
 |--------------------------------------------------------------------------
 |
