@@ -616,14 +616,16 @@ input[type=submit].btn {
     text-decoration: none;
   }
   .active a {
-    background: #39a3e6;
-    border: 1px solid #0082d5;
+    /*background: #39a3e6;*/
+    background: @linkColor;
+    border: 1px solid @linkColor;
     color: #fff;
   }
   a:hover {
     color: #fff;
-    background: #ec8526;
-    border: 1px solid #d77011;
+    /*background: #ec8526;*/
+    background: @linkColorHover;
+    border: 1px solid @linkColorHover;
   }
   .disabled a,
   .disabled a:hover {
