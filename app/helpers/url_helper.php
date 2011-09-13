@@ -7,9 +7,18 @@
 	 */
 	if ( ! function_exists('static_url'))
 	{
-		function static_url() 
+		function static_url($uri = '') 
 		{
-			$config =& get_config();	
-			return (isset($config['static_url']) AND $config['static_url'] != '') ? $config['static_url'] : $config['base_url'];
+			$config =& get_config();
+			$static_url = (isset($config['static_url']) AND $config['static_url'] != '') ? $config['static_url'] : $config['base_url'];
+			if ($uri == '')
+			{
+				return rtrim($static_url, '/').'/';
+			}
+			if (is_array($uri))
+			{
+				$uri = implode('/', $uri);
+			}
+			return rtrim($static_url, '/').'/'.$uri;
 		}
 	}

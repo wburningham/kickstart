@@ -12,22 +12,22 @@
     <![endif]-->
 
     <!-- Le styles -->
-<link rel="stylesheet/less" href="../../assets/less/bootstrap.less">
-<script src="../../assets/js/less-1.1.3.min.js"></script>
-    <link href="../../assets/css/docs.css" rel="stylesheet">
-    <link href="../../assets/css/prettify.css" rel="stylesheet">
+    <link rel="stylesheet/less" href="<?php echo static_url('assets/less/bootstrap.less'); ?>">
+    <script src="<?php echo static_url('assets/js/less-1.1.3.min.js'); ?>"></script>
+    <link href="<?php echo static_url('assets/css/docs.css'); ?>" rel="stylesheet">
+    <link href="<?php echo static_url('assets/css/prettify.css'); ?>" rel="stylesheet">
 
     <!-- Le javascript -->
-    <script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
     <script src="http://autobahn.tablesorter.com/jquery.tablesorter.min.js"></script>
-    <script src="../../assets/js/prettify.js"></script>
-    <script src="../../assets/js/application.js"></script>
+    <script src="<?php echo static_url('assets/js/prettify.js'); ?>"></script>
+    <script src="<?php echo static_url('assets/js/application.js'); ?>"></script>
 
     <!-- Le fav and touch icons -->
-    <link rel="shortcut icon" href="../../assets/img/favicon.ico">
-    <link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="../../assets/img/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="../../assets/img/apple-touch-icon-114x114.png">
+    <link rel="shortcut icon" href="<?php echo static_url(); ?>assets/img/favicon.ico">
+    <link rel="apple-touch-icon" href="<?php echo static_url(); ?>assets/img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="<?php echo static_url(); ?>assets/img/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="<?php echo static_url(); ?>assets/img/apple-touch-icon-114x114.png">
   </head>
 
   <body>

@@ -17,7 +17,7 @@ class Main extends MY_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
-	public function index()
+	public function example()
 	{
 		$_GET['test'] = 'get';
 		$_POST['test'] = 'post';
@@ -31,7 +31,7 @@ class Main extends MY_Controller {
 	 *  @author  Jarrett Burningham
 	 *	 @access public
 	*/
-	public function example()
+	public function index()
 	{
 		$this->load->view('example');
 	}
