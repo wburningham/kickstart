@@ -1,4 +1,25 @@
 $(document).ready(function(){
+	
+	// fades out alert-messages when the x is clicked
+	$('.alert-message .close').live('click', function(e){
+		e.preventDefault(); 
+		$(this).parent('.alert-message').fadeOut();
+	});
+
+	// Toggles visible containers of tabs and pills
+	$('.pill a, .tabs a').click(function(e){
+		
+		e.preventDefault(); 
+		
+		// Get target container
+		var div = $(this).attr('href');
+
+		// Add active link
+		var $li = $(this).parent('li').addClass('active');
+
+		$li.parent('ul').children('li').removeClass('active');
+
+	});
 
   // Google code prettify
   // ====================

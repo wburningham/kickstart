@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://mse-datamini1.byu.edu/~burninwj/kickstart/';
+$config['base_url']	= 'http://localhost/~wburningham/kickstart/';
 
 /*
 |--------------------------------------------------------------------------
